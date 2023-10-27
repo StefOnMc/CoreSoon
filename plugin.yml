@@ -1,0 +1,30 @@
+name: Core
+main: Stef\Base
+api: 5.0.0
+version: BETA
+author: zecolik
+permissions:
+  ec.use:
+    default: op
+  stats.use:
+    default: op
+  craft.use:
+    default: op
+  nv.use:
+    default: op
+  info.use:
+    default: op
+  trash.use:
+    default: op
+  event.use:
+    default: true
+  spawn.use:
+    default: true
+  minage.use:
+    default: true
+  repair.use:
+    default: op
+  kit.use:
+    default: true
+  clear.use:
+    default: op
