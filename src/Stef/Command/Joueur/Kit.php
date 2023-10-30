@@ -55,7 +55,133 @@ if($sender instanceof Player){
 	$kit->getInventory()->setItem(22,VanillaItems::POTION()->setType(PotionType::NIGHT_VISION())->setCustomName("Kit §6Premium"));
 	$kit->setListener(function (InvMenuTransaction $transaction) use ($sender,$kit): InvMenuTransactionResult {
 		if($transaction->getItemClicked()->getTypeId() === VanillaItems::BLEACH()->getTypeId()){
-			$sender->sendMessage("§aVous avez bien claim le kit §7Joueur");
+				if(KitUtils::hasCooldown($sender->getName(),"star")){
+					$temps = KitUtils::getTime($sender->getName(),"star");
+					$sender->sendMessage("Il reste " . $temps . " pour récupérer le kit.");
+				}else{
+					if($sender->getInventory()->canAddItem(VanillaItems::COPPER_INGOT())){
+						KitUtils::setCooldown($sender->getName(),6,"heure","star");
+						$sender->sendMessage("§aVous avez bien claim le kit §eStar");
+					}else{
+						$sender->sendMessage("vous ne pouvez pas récupéré");
+					}
+					// item
+				}
+				$kit->onClose($sender);
+		}
+		if($transaction->getItemClicked()->getTypeId() === VanillaItems::COPPER_INGOT()->getTypeId()){
+			if($sender->hasPermission("kit.star")){
+				if(KitUtils::hasCooldown($sender->getName(),"star")){
+					$temps = KitUtils::getTime($sender->getName(),"star");
+					$sender->sendMessage("Il reste " . $temps . " pour récupérer le kit.");
+				}else{
+					if($sender->getInventory()->canAddItem(VanillaItems::COPPER_INGOT())){
+						KitUtils::setCooldown($sender->getName(),6,"heure","star");
+						$sender->sendMessage("§aVous avez bien claim le kit §eStar");
+					}else{
+						$sender->sendMessage("vous ne pouvez pas récupéré");
+					}
+					// item
+				}
+				$kit->onClose($sender);
+			}else{
+				$sender->sendMessage(Base::NO_PERM);
+			}
+		}
+		if($transaction->getItemClicked()->getTypeId() === VanillaItems::COMPASS()->getTypeId()){
+			if($sender->hasPermission("kit.star")){
+				if(KitUtils::hasCooldown($sender->getName(),"star")){
+					$temps = KitUtils::getTime($sender->getName(),"star");
+					$sender->sendMessage("Il reste " . $temps . " pour récupérer le kit.");
+				}else{
+					if($sender->getInventory()->canAddItem(VanillaItems::COPPER_INGOT())){
+						KitUtils::setCooldown($sender->getName(),6,"heure","star");
+						$sender->sendMessage("§aVous avez bien claim le kit §eStar");
+					}else{
+						$sender->sendMessage("vous ne pouvez pas récupéré");
+					}
+					// item
+				}
+				$kit->onClose($sender);
+			}else{
+				$sender->sendMessage(Base::NO_PERM);
+			}
+		}
+		if($transaction->getItemClicked()->getTypeId() === VanillaItems::AMETHYST_SHARD()->getTypeId()){
+			if($sender->hasPermission("kit.star")){
+				if(KitUtils::hasCooldown($sender->getName(),"star")){
+					$temps = KitUtils::getTime($sender->getName(),"star");
+					$sender->sendMessage("Il reste " . $temps . " pour récupérer le kit.");
+				}else{
+					if($sender->getInventory()->canAddItem(VanillaItems::COPPER_INGOT())){
+						KitUtils::setCooldown($sender->getName(),6,"heure","star");
+						$sender->sendMessage("§aVous avez bien claim le kit §eStar");
+					}else{
+						$sender->sendMessage("vous ne pouvez pas récupéré");
+					}
+					// item
+				}
+				$kit->onClose($sender);
+			}else{
+				$sender->sendMessage(Base::NO_PERM);
+			}
+		}
+		if($transaction->getItemClicked()->getTypeId() === VanillaItems::GOLDEN_CARROT()->getTypeId()){
+			if($sender->hasPermission("kit.star")){
+				if(KitUtils::hasCooldown($sender->getName(),"star")){
+					$temps = KitUtils::getTime($sender->getName(),"star");
+					$sender->sendMessage("Il reste " . $temps . " pour récupérer le kit.");
+				}else{
+					if($sender->getInventory()->canAddItem(VanillaItems::COPPER_INGOT())){
+						KitUtils::setCooldown($sender->getName(),6,"heure","star");
+						$sender->sendMessage("§aVous avez bien claim le kit §eStar");
+					}else{
+						$sender->sendMessage("vous ne pouvez pas récupéré");
+					}
+					// item
+				}
+				$kit->onClose($sender);
+			}else{
+				$sender->sendMessage(Base::NO_PERM);
+			}
+		}
+		if($transaction->getItemClicked()->getTypeId() === VanillaItems::RAW_GOLD()->getTypeId()){
+			if($sender->hasPermission("kit.star")){
+				if(KitUtils::hasCooldown($sender->getName(),"star")){
+					$temps = KitUtils::getTime($sender->getName(),"star");
+					$sender->sendMessage("Il reste " . $temps . " pour récupérer le kit.");
+				}else{
+					if($sender->getInventory()->canAddItem(VanillaItems::COPPER_INGOT())){
+						KitUtils::setCooldown($sender->getName(),6,"heure","star");
+						$sender->sendMessage("§aVous avez bien claim le kit §eStar");
+					}else{
+						$sender->sendMessage("vous ne pouvez pas récupéré");
+					}
+					// item
+				}
+				$kit->onClose($sender);
+			}else{
+				$sender->sendMessage(Base::NO_PERM);
+			}
+		}
+		if($transaction->getItemClicked()->getTypeId() === VanillaItems::BONE()->getTypeId()){
+			if($sender->hasPermission("kit.star")){
+				if(KitUtils::hasCooldown($sender->getName(),"star")){
+					$temps = KitUtils::getTime($sender->getName(),"star");
+					$sender->sendMessage("Il reste " . $temps . " pour récupérer le kit.");
+				}else{
+					if($sender->getInventory()->canAddItem(VanillaItems::COPPER_INGOT())){
+						KitUtils::setCooldown($sender->getName(),6,"heure","star");
+						$sender->sendMessage("§aVous avez bien claim le kit §eStar");
+					}else{
+						$sender->sendMessage("vous ne pouvez pas récupéré");
+					}
+					// item
+				}
+				$kit->onClose($sender);
+			}else{
+				$sender->sendMessage(Base::NO_PERM);
+			}
 		}
 		if($transaction->getItemClicked()->getTypeId() === VanillaItems::BRICK()->getTypeId()){
 			if($sender->hasPermission("kit.star")){
@@ -63,24 +189,31 @@ if($sender instanceof Player){
 					$temps = KitUtils::getTime($sender->getName(),"star");
 					$sender->sendMessage("Il reste " . $temps . " pour récupérer le kit.");
 				}else{
+				if($sender->getInventory()->canAddItem(VanillaItems::COPPER_INGOT())){
 					KitUtils::setCooldown($sender->getName(),6,"heure","star");
 					$sender->sendMessage("§aVous avez bien claim le kit §eStar");
+				}else{
+					$sender->sendMessage("vous ne pouvez pas récupéré");
+				}
 					// item
 				}
 				$kit->onClose($sender);
-				$transaction->discard();
 			}else{
 				$sender->sendMessage(Base::NO_PERM);
 			}
 		}
 		if($transaction->getItemClicked()->getTypeId() === VanillaItems::ARROW()->getTypeId()){
-			if($sender->hasPermission("kit.youtube")){
-				if(KitUtils::hasCooldown($sender->getName(),"yt")){
-					$temps = KitUtils::getTime($sender->getName(),"yt");
+			if($sender->hasPermission("kit.star")){
+				if(KitUtils::hasCooldown($sender->getName(),"star")){
+					$temps = KitUtils::getTime($sender->getName(),"star");
 					$sender->sendMessage("Il reste " . $temps . " pour récupérer le kit.");
 				}else{
-					KitUtils::setCooldown($sender->getName(),6,"heure","yt");
-					$sender->sendMessage("§aVous avez bien claim le kit §cYou§rtube");
+					if($sender->getInventory()->canAddItem(VanillaItems::COPPER_INGOT())){
+						KitUtils::setCooldown($sender->getName(),6,"heure","star");
+						$sender->sendMessage("§aVous avez bien claim le kit §eStar");
+					}else{
+						$sender->sendMessage("vous ne pouvez pas récupéré");
+					}
 					// item
 				}
 				$kit->onClose($sender);
@@ -89,8 +222,23 @@ if($sender instanceof Player){
 			}
 		}
 		if($transaction->getItemClicked()->getTypeId() === VanillaItems::POTION()->setType(PotionType::NIGHT_VISION())->getTypeId()){
-			$sender->sendMessage("§aVous avez bien claim le kit §6Premium");
-			$kit->onClose($sender);
+			if($sender->hasPermission("kit.star")){
+				if(KitUtils::hasCooldown($sender->getName(),"star")){
+					$temps = KitUtils::getTime($sender->getName(),"star");
+					$sender->sendMessage("Il reste " . $temps . " pour récupérer le kit.");
+				}else{
+					if($sender->getInventory()->canAddItem(VanillaItems::COPPER_INGOT())){
+						KitUtils::setCooldown($sender->getName(),6,"heure","star");
+						$sender->sendMessage("§aVous avez bien claim le kit §eStar");
+					}else{
+						$sender->sendMessage("vous ne pouvez pas récupéré");
+					}
+					// item
+				}
+				$kit->onClose($sender);
+			}else{
+				$sender->sendMessage(Base::NO_PERM);
+			}
 		}
 		return $transaction->discard();
 	});

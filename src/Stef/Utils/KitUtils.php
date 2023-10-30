@@ -11,7 +11,7 @@ class KitUtils
 	/** @var Config */
 	public static $cooldowns;
 	public static function Init(){
-		self::$cooldowns = new Config(Base::getInstance()->getDataFolder() . "cooldowns.yml", Config::YAML);
+		self::$cooldowns = new Config(Base::getInstance()->getDataFolder() . "kit.yml", Config::YAML);
 	}
 	private static function setCooldowns(string $name, int $cooldownTime, string $grade) {
 

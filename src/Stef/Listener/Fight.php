@@ -72,7 +72,6 @@ EconomyAPI::getInstance()->addMoney($damager,$luck);
 	}
 	public function onQuit(PlayerQuitEvent $event): void
 	{
-		$event->setQuitMessage("");
 		$player = $event->getPlayer();
 		if (!isset(Base::$pc[$player->getName()])) return;
 		if (!$this->quit) return;

@@ -15,6 +15,7 @@ use pocketmine\event\server\DataPacketSendEvent;
 use pocketmine\network\mcpe\protocol\MovePlayerPacket;
 use pocketmine\network\mcpe\protocol\PlayerAuthInputPacket;
 use pocketmine\network\mcpe\protocol\ResourcePackStackPacket;
+use Stef\Base;
 use Stef\Utils\WebhookUtils;
 
 class Logs implements Listener
@@ -41,6 +42,7 @@ class Logs implements Listener
 	private $breakTimes = [];
 public function Join(PlayerJoinEvent $e){
 $ps = $e->getPlayer()->getName();
+
 WebhookUtils::JoinLog($ps ." vien de rejoindre le serveur.");
 }
 
@@ -51,7 +53,11 @@ public function Quit(PlayerQuitEvent $e){
 public function Chat(PlayerChatEvent $e){
 	$ps = $e->getPlayer()->getName();
 	$msg = $e->getMessage();
-	WebhookUtils::ChatLog($ps . " » ".$msg);
+	if($msg === "@here" or $msg === "@here" or $msg === "<@759389053937385492>" or $msg === "<@1012704749302325358>"){
+Base::getInstance()->getLogger()->critical("Attention : ". $ps ." suspecté de spam de mention.");
+	}else{
+		WebhookUtils::ChatLog($ps . " » ".$msg);
+	}
 }
 public function Command(CommandEvent $e){
 	$p = $e->getSender()->getName();

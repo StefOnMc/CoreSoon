@@ -58,7 +58,6 @@ class ItemUse implements Listener
 		$this->checkItemHeld($player, VanillaItems::AIR());
 	}
 
-
 	public function ItemUse(PlayerItemUseEvent $e){
 $p = $e->getPlayer();
 $ps = $p->getName();

@@ -49,15 +49,16 @@ class Base extends PluginBase
 		TaskUtils::RegistryTask();
 		// Inv
 		InvmenuUtils::RegistryInv($this);
+		// Kit
 		KitUtils::Init();
-// Logs
+		// Logs
 		WebhookUtils::SrvStart("Le serveur vien de s'allumer le ". TimeUtils::GetActualTime());
     }
     protected function onDisable(): void
     {
 		//Logs
 		WebhookUtils::SrvStop("Le serveur vien de s'eteindre le " . TimeUtils::GetActualTime());
-		// combat
+		// Combat
 		foreach (Base::$pc as $playerName) {
 			unset(Base::$pc[$playerName]);
 		}

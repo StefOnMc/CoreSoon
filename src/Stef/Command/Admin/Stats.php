@@ -76,7 +76,6 @@ if($sender instanceof Player){
                     $date->setTimezone($dateFormat);
                     $eu = $date->format('H:i');
                     $sender->sendMessage("§aStatstique du serveur  à " . $eu);
-
                     $sender->sendMessage("§cUptime actuel : ". $uptime);
                     $sender->sendMessage("§bTps actuel : {$tpsColor}{$server->getTicksPerSecond()} ({$server->getTickUsage()}%)");
                     $sender->sendMessage("§bTps moyen : {$tpsColor}{$server->getTicksPerSecondAverage()} ({$server->getTickUsageAverage()}%)");

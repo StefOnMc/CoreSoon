@@ -6,13 +6,21 @@ use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransaction;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use onebone\economyapi\EconomyAPI;
+use pocketmine\inventory\Inventory;
+use pocketmine\item\Durable;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\enchantment\VanillaEnchantments;
+use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
 
 class EnchantGUI
 {
+
+
+
+
+
 	// a débuger
 	public static function SendShop(Player $p)
 	{
@@ -27,53 +35,68 @@ class EnchantGUI
 			// Protection
 			if ($i === VanillaItems::DIAMOND_HELMET()->getTypeId()) {
 				self::SendHeldEnchantement($enchant);
+
 			}
+			$c = $p->getInventory()->getItemInHand();
 			if ($i === VanillaItems::WOODEN_SHOVEL()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1))->getTypeId()) {
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
-					$p->sendMessage("§cVous ne pouvez pas vous enchanter car vous avez déja l'enchantement protection 1.");
-					$enchant->onClose($p);
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
-						$p->sendMessage("test");
-						$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
-						$p->getInventory()->setItemInHand($e);
-						$enchant->onClose($p);
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
 					}else{
-						$p->sendMessage("sa marche pas ta pas de tune");
-						$enchant->onClose($p);
+						$p->sendMessage("§cImposible d'enchanter un block.");
 					}
 				}
+
 			}
 			if ($i === VanillaItems::STONE_SHOVEL()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 2))->getTypeId()) {
-				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),2)){
-					$p->sendMessage("§cVous ne pouvez pas vous enchanter car vous avez déja l'enchantement protection 2.");
-					$enchant->onClose($p);
+				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
-						$p->sendMessage("test");
-						$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 2));
-						$p->getInventory()->setItemInHand($e);
-						$enchant->onClose($p);
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
 					}else{
-						$p->sendMessage("sa marche pas ta pas de tune");
-						$enchant->onClose($p);
+						$p->sendMessage("§cImposible d'enchanter un block.");
 					}
 				}
 			}
 
 			if ($i === VanillaItems::IRON_SHOVEL()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 3))->getTypeId()) {
-				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),3)){
-					$p->sendMessage("§cVous ne pouvez pas vous enchanter car vous avez déja l'enchantement protection 3.");
-					$enchant->onClose($p);
+				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
-						$p->sendMessage("test");
-						$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 3));
-						$p->getInventory()->setItemInHand($e);
-						$enchant->onClose($p);
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
 					}else{
-						$p->sendMessage("sa marche pas ta pas de tune");
-						$enchant->onClose($p);
+						$p->sendMessage("§cImposible d'enchanter un block.");
 					}
 				}
 			}
@@ -82,51 +105,63 @@ class EnchantGUI
 				self::SendAxeEnchantement($enchant);
 			}
 			if ($i === VanillaItems::WOODEN_AXE()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 1))->getTypeId()) {
-				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::UNBREAKING(),1)){
-					$p->sendMessage("§cVous ne pouvez pas vous enchanter car vous avez déja l'enchantement solidité 1.");
-					$enchant->onClose($p);
+				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
-						$p->sendMessage("test");
-						$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 1));
-						$p->getInventory()->setItemInHand($e);
-						$enchant->onClose($p);
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
 					}else{
-						$p->sendMessage("sa marche pas ta pas de tune");
-						$enchant->onClose($p);
+						$p->sendMessage("§cImposible d'enchanter un block.");
 					}
 				}
 			}
 			if ($i === VanillaItems::STONE_AXE()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 2))->getTypeId()) {
-				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::UNBREAKING(),2)){
-					$p->sendMessage("§cVous ne pouvez pas vous enchanter car vous avez déja l'enchantement solidité 2.");
-					$enchant->onClose($p);
+				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
-						$p->sendMessage("test");
-						$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 2));
-						$p->getInventory()->setItemInHand($e);
-						$enchant->onClose($p);
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
 					}else{
-						$p->sendMessage("sa marche pas ta pas de tune");
-						$enchant->onClose($p);
+						$p->sendMessage("§cImposible d'enchanter un block.");
 					}
 				}
 			}
 
 			if ($i === VanillaItems::IRON_AXE()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(), 3))->getTypeId()) {
-				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::UNBREAKING(),3)){
-					$p->sendMessage("§cVous ne pouvez pas vous enchanter car vous avez déja l'enchantement solidité 3.");
-					$enchant->onClose($p);
+				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
-						$p->sendMessage("test");
-						$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 3));
-						$p->getInventory()->setItemInHand($e);
-						$enchant->onClose($p);
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
 					}else{
-						$p->sendMessage("sa marche pas ta pas de tune");
-						$enchant->onClose($p);
+						$p->sendMessage("§cImposible d'enchanter un block.");
 					}
 				}
 			}
@@ -135,57 +170,129 @@ class EnchantGUI
 				self::SendSharpnessEnchantement($enchant);
 			}
 			if ($i === VanillaItems::WOODEN_SWORD()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::SHARPNESS(), 1))->getTypeId()) {
-				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::SHARPNESS(),1)){
-					$p->sendMessage("§cVous ne pouvez pas vous enchanter car vous avez déja l'enchantement tranchant 1.");
-					$enchant->onClose($p);
+				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
-						$p->sendMessage("test");
-						$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::SHARPNESS(), 1));
-						$p->getInventory()->setItemInHand($e);
-						$enchant->onClose($p);
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
 					}else{
-						$p->sendMessage("sa marche pas ta pas de tune");
-						$enchant->onClose($p);
+						$p->sendMessage("§cImposible d'enchanter un block.");
 					}
 				}
 			}
 			if ($i === VanillaItems::STONE_SWORD()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::SHARPNESS(), 2))->getTypeId()) {
-				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::SHARPNESS(),2)){
-					$p->sendMessage("§cVous ne pouvez pas vous enchanter car vous avez déja l'enchantement tranchant 2.");
-					$enchant->onClose($p);
+				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
-						$p->sendMessage("test");
-						$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 2));
-						$p->getInventory()->setItemInHand($e);
-						$enchant->onClose($p);
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
 					}else{
-						$p->sendMessage("sa marche pas ta pas de tune");
-						$enchant->onClose($p);
+						$p->sendMessage("§cImposible d'enchanter un block.");
 					}
 				}
 			}
 
 			if ($i === VanillaItems::IRON_SWORD()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::SHARPNESS(), 3))->getTypeId()) {
-				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::SHARPNESS(),3)){
-					$p->sendMessage("§cVous ne pouvez pas vous enchanter car vous avez déja l'enchantement tranchant 3.");
-					$enchant->onClose($p);
+				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
-						$p->sendMessage("test");
-						$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::SHARPNESS(), 3));
-						$p->getInventory()->setItemInHand($e);
-						$enchant->onClose($p);
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
 					}else{
-						$p->sendMessage("sa marche pas ta pas de tune");
-						$enchant->onClose($p);
+						$p->sendMessage("§cImposible d'enchanter un block.");
 					}
 				}
 			}
 			// Pickaxe
 			if ($i === VanillaItems::DIAMOND_PICKAXE()->getTypeId()) {
 				self::SendEfficiencyEnchantement($enchant);
+			}
+			if($i === VanillaItems::WOODEN_PICKAXE()){
+				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
+				}else{
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
+					}else{
+						$p->sendMessage("§cImposible d'enchanter un block.");
+					}
+				}
+			}
+			if($i === VanillaItems::STONE_PICKAXE()){
+				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
+				}else{
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
+					}else{
+						$p->sendMessage("§cImposible d'enchanter un block.");
+					}
+				}
+			}
+			if($i === VanillaItems::IRON_PICKAXE()){
+				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
+					$p->sendMessage("§cVous avez déja le méme enchantement.");
+				}else{
+					if($c instanceof Durable){
+						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
+							$p->sendMessage("test");
+							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
+							$p->getInventory()->setItemInHand($e);
+							$enchant->onClose($p);
+							EconomyAPI::getInstance()->reduceMoney($p,1001);
+						}else{
+							$p->sendMessage("sa marche pas ta pas de tune");
+							$enchant->onClose($p);
+						}
+					}else{
+						$p->sendMessage("§cImposible d'enchanter un block.");
+					}
+				}
 			}
 			return $transaction->discard();
 		});
