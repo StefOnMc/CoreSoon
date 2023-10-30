@@ -6,11 +6,17 @@ use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransaction;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use onebone\economyapi\EconomyAPI;
+use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\inventory\Inventory;
+use pocketmine\item\Armor;
+use pocketmine\item\Axe;
 use pocketmine\item\Durable;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\enchantment\VanillaEnchantments;
 use pocketmine\item\Item;
+use pocketmine\item\Pickaxe;
+use pocketmine\item\Shovel;
+use pocketmine\item\Sword;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
 
@@ -42,7 +48,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Armor){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
@@ -54,7 +60,7 @@ class EnchantGUI
 							$enchant->onClose($p);
 						}
 					}else{
-						$p->sendMessage("§cImposible d'enchanter un block.");
+						$p->sendMessage("§cImposible d'enchanter un block ou autre item.");
 					}
 				}
 
@@ -63,7 +69,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Armor){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
@@ -75,7 +81,7 @@ class EnchantGUI
 							$enchant->onClose($p);
 						}
 					}else{
-						$p->sendMessage("§cImposible d'enchanter un block.");
+						$p->sendMessage("§cImposible d'enchanter un block ou autre item.");
 					}
 				}
 			}
@@ -84,7 +90,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Armor){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
@@ -96,7 +102,7 @@ class EnchantGUI
 							$enchant->onClose($p);
 						}
 					}else{
-						$p->sendMessage("§cImposible d'enchanter un block.");
+						$p->sendMessage("§cImposible d'enchanter un block ou autre item.");
 					}
 				}
 			}
@@ -108,7 +114,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Armor || $c instanceof Pickaxe || $c instanceof  Axe || $c instanceof Shovel || $c instanceof Sword){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
@@ -120,7 +126,7 @@ class EnchantGUI
 							$enchant->onClose($p);
 						}
 					}else{
-						$p->sendMessage("§cImposible d'enchanter un block.");
+						$p->sendMessage("§cImposible d'enchanter un block ou autre item.");
 					}
 				}
 			}
@@ -128,7 +134,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Armor || $c instanceof Pickaxe || $c instanceof  Axe || $c instanceof Shovel || $c instanceof Sword){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
@@ -140,7 +146,7 @@ class EnchantGUI
 							$enchant->onClose($p);
 						}
 					}else{
-						$p->sendMessage("§cImposible d'enchanter un block.");
+						$p->sendMessage("§cImposible d'enchanter un block ou autre item.");
 					}
 				}
 			}
@@ -149,7 +155,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Armor || $c instanceof Pickaxe || $c instanceof  Axe || $c instanceof Shovel || $c instanceof Sword){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
@@ -161,7 +167,7 @@ class EnchantGUI
 							$enchant->onClose($p);
 						}
 					}else{
-						$p->sendMessage("§cImposible d'enchanter un block.");
+						$p->sendMessage("§cImposible d'enchanter un block ou autre item.");
 					}
 				}
 			}
@@ -173,7 +179,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Sword){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
@@ -193,7 +199,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Sword){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
@@ -214,7 +220,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Sword){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
@@ -238,7 +244,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Pickaxe || $c instanceof Shovel){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
@@ -258,7 +264,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Pickaxe || $c instanceof Shovel){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
@@ -278,7 +284,7 @@ class EnchantGUI
 				if($p->getInventory()->getItemInHand()->hasEnchantment(VanillaEnchantments::PROTECTION(),1)){
 					$p->sendMessage("§cVous avez déja le méme enchantement.");
 				}else{
-					if($c instanceof Durable){
+					if($c instanceof Pickaxe || $c instanceof Shovel){
 						if(EconomyAPI::getInstance()->myMoney($p) >= 1001){
 							$p->sendMessage("test");
 							$e = $p->getInventory()->getItemInHand()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::PROTECTION(), 1));
