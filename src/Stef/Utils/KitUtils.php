@@ -10,8 +10,11 @@ class KitUtils
 {
 	/** @var Config */
 	public static $cooldowns;
-	private static function setCooldowns(string $name, int $cooldownTime, string $grade) {
+	public static function init(){
 		self::$cooldowns = new Config(Base::getInstance()->getDataFolder() . "cooldowns.yml", Config::YAML);
+	}
+	private static function setCooldowns(string $name, int $cooldownTime, string $grade) {
+
 		$cooldownData = self::$cooldowns->getNested("cooldowns.$grade", []);
 		$cooldownData[$name] = $cooldownTime;
 		self::$cooldowns->setNested("cooldowns.$grade", $cooldownData);
