@@ -30,7 +30,12 @@ class CommandUtils
 		Base::getInstance()->getServer()->getCommandMap()->unregister(Base::getInstance()->getServer()->getCommandMap()->getCommand("say"));
 		Base::getInstance()->getServer()->getCommandMap()->unregister(Base::getInstance()->getServer()->getCommandMap()->getCommand("msg"));
 	}
-public static function RegisterPlayer(){
+	public static function Init(){
+		self::RegisterPlayer();
+		self::RegisterRole();
+		self::RegisterStaff();
+	}
+private static function RegisterPlayer(){
     Base::getInstance()->getServer()->getCommandMap()->registerAll(Base::PREFIX,[
         new Nv("nv","Avoir l'effet de night vision.","/nv",[]),
 		new Event("event","Ouvre une interface.","/event",[]),
@@ -41,7 +46,7 @@ public static function RegisterPlayer(){
 		new Msg("msg","écrire un msg a quelqu'un.","/msg",[]),
     ]);
 }
-    public static function RegisterStaff(){
+    private static function RegisterStaff(){
         Base::getInstance()->getServer()->getCommandMap()->registerAll(Base::PREFIX,[
             new Stats("stats","Voir les stastistique du serveur.","/stats player & server",[""]),
 			new Info("info","Voir les statistiques d'un joueur.","/info joueur",[""]),
@@ -49,7 +54,7 @@ public static function RegisterPlayer(){
 			new Say("say","Faire une annonce.","/say msg",[]),
         ]);
     }
-    public static function RegisterRole(){
+    private static function RegisterRole(){
         Base::getInstance()->getServer()->getCommandMap()->registerAll(Base::PREFIX,[
             new Craft("craft","Ouvre un établi.","/craft",[]),
             new Ec("ec","Ouvre un enderchest.","/ec",[]),

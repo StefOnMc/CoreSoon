@@ -42,18 +42,15 @@ class Base extends PluginBase
     {
        $this->getLogger()->notice("Core chargé.");
 	   // command
-       CommandUtils::RegisterPlayer();
-       CommandUtils::RegisterRole();
-       CommandUtils::RegisterStaff();
+       CommandUtils::Init();
 	   // event
 		EventUtils::RegistryEvent($this);
 		// task
 		TaskUtils::RegistryTask();
 		// Inv
 		InvmenuUtils::RegistryInv($this);
-		KitUtils::init();
+		KitUtils::Init();
 // Logs
-
 		WebhookUtils::SrvStart("Le serveur vien de s'allumer le ". TimeUtils::GetActualTime());
     }
     protected function onDisable(): void

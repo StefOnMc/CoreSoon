@@ -5,8 +5,15 @@ namespace Stef\Listener;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\event\player\PlayerItemUseEvent;
+use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerQuitEvent;
+use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
+use pocketmine\player\Player;
+use pocketmine\scheduler\ClosureTask;
+use Stef\Base;
 
 class ItemUse implements Listener
 {
@@ -14,7 +21,45 @@ class ItemUse implements Listener
 	private array $c2 = [];
 	private array $c3 = [];
 	private array $c4 = [];
-public function ItemUse(PlayerItemUseEvent $e){
+	private array $c5 = [];
+	public function checkItemHeld(Player $player, Item $item)
+	{
+		$playerName = $player->getName();
+		$playerEffect = $player->getEffects();
+		if ($item->getTypeId() === VanillaItems::IRON_PICKAXE()->getTypeId()) {
+			$effect = new EffectInstance(VanillaEffects::HASTE(), 3600 *20, 1, false);
+			$playerEffect->add($effect);
+			$this->c5[$playerName] = true;
+		} elseif ($this->Isonpickaxe($player)) {
+			$playerEffect->remove(VanillaEffects::HASTE());
+			unset($this->c5[$playerName]);
+		}
+	}
+
+	public function Isonpickaxe(Player $player): bool
+	{
+		return isset($this->c5[$player->getName()]);
+	}
+
+	public function itemHeld(PlayerItemHeldEvent $event)
+	{
+		$this->checkItemHeld($event->getPlayer(), $event->getItem());
+	}
+
+	public function playerJoinEvent(PlayerJoinEvent $event)
+	{
+		$player = $event->getPlayer();
+		$this->checkItemHeld($player, $player->getInventory()->getItemInHand());
+	}
+
+	public function playerQuitEvent(PlayerQuitEvent $event)
+	{
+		$player = $event->getPlayer();
+		$this->checkItemHeld($player, VanillaItems::AIR());
+	}
+
+
+	public function ItemUse(PlayerItemUseEvent $e){
 $p = $e->getPlayer();
 $ps = $p->getName();
 $i = $e->getItem();
@@ -46,7 +91,7 @@ if($i->getTypeId() === VanillaItems::CARROT()->getTypeId()){
 		$restant = 120 - (time() - $this->c3[$ps]);
 		$p->sendMessage("§cIl te reste ". $restant . " seconde pour réutilisée.");
 	}else{
-		$this->c1[$ps] = time();
+		$this->c3[$ps] = time();
 		$p->getEffects()->add(new EffectInstance(VanillaEffects::STRENGTH(),15*20,2));
 		$p->sendMessage("§aVous avez bien utilisé votre stick de force.");
 	}
@@ -58,7 +103,7 @@ if($i->getTypeId() === VanillaItems::CARROT()->getTypeId()){
 			$restant = 15 - (time() - $this->c4[$ps]);
 			$p->sendMessage("§cIl te reste ". $restant . " seconde pour réutilisée.");
 		}else{
-			$this->c1[$ps] = time();
+			$this->c4[$ps] = time();
 		}
 	}
 }

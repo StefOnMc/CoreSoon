@@ -10,7 +10,7 @@ class KitUtils
 {
 	/** @var Config */
 	public static $cooldowns;
-	public static function init(){
+	public static function Init(){
 		self::$cooldowns = new Config(Base::getInstance()->getDataFolder() . "cooldowns.yml", Config::YAML);
 	}
 	private static function setCooldowns(string $name, int $cooldownTime, string $grade) {
@@ -20,7 +20,7 @@ class KitUtils
 		self::$cooldowns->setNested("cooldowns.$grade", $cooldownData);
 		self::$cooldowns->save();
 	}
-	public static function setCooldown($playerName, $time, string $format, string $grade) {
+	public static function setCooldown($playerName, $time, string $format , string $grade) {
 		$seconds = $time;
 		if ($format === 'minute') {
 			$seconds *= 60;
@@ -41,27 +41,11 @@ class KitUtils
 
 		return 0;
 	}
-	public static function formatTime($seconds) {
-		if ($seconds >= 86400) {
-			$days = floor($seconds / 86400);
-			$hours = floor(($seconds % 86400) / 3600);
-			$minutes = floor(($seconds % 3600) / 60);
-			return "$days jour(s), $hours heure(s) et $minutes minute(s)";
-		} elseif ($seconds >= 3600) {
-			$hours = floor($seconds / 3600);
-			$minutes = floor(($seconds % 3600) / 60);
-			return "$hours heure(s) et $minutes minute(s)";
-		} elseif ($seconds >= 60) {
-			$minutes = floor($seconds / 60);
-			return "$minutes minute(s)";
-		} else {
-			return "$seconds seconde(s)";
-		}
-	}
+
 
 	public static function getTime(string $playerName,string $grade) {
 		$remainingTime = self::getTimes($playerName,$grade);
-		return self::formatTime($remainingTime);
+		return TimeUtils::FormatTime($remainingTime);
 	}
 
 	public static function hasCooldown(string $playerName,string $grade) {
