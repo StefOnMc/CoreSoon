@@ -10,6 +10,7 @@ use Stef\Utils\EventUtils;
 use Stef\Utils\InvmenuUtils;
 use Stef\Utils\KitUtils;
 use Stef\Utils\TaskUtils;
+use Stef\Utils\TimeUtils;
 use Stef\Utils\WebhookUtils;
 
 class Base extends PluginBase
@@ -50,22 +51,15 @@ class Base extends PluginBase
 		TaskUtils::RegistryTask();
 		// Inv
 		InvmenuUtils::RegistryInv($this);
-		KitUtils::$cooldowns = new Config($this->getDataFolder() . "cooldowns.yml", Config::YAML);
+		KitUtils::init();
 // Logs
-		$date = new \DateTime();
-		$dateFormat = new \DateTimeZone('Europe/Paris');
-		$date->setTimezone($dateFormat);
-		$eu = $date->format('d/m/Y à H:i:s');
-		WebhookUtils::SrvStart("Le serveur vien de s'allumer le ". $eu);
+
+		WebhookUtils::SrvStart("Le serveur vien de s'allumer le ". TimeUtils::GetActualTime());
     }
     protected function onDisable(): void
     {
 		//Logs
-		$date = new \DateTime();
-		$dateFormat = new \DateTimeZone('Europe/Paris');
-		$date->setTimezone($dateFormat);
-		$eu = $date->format('d/m/Y à H:i:s');
-		WebhookUtils::SrvStop("Le serveur vien de s'eteindre le " . $eu);
+		WebhookUtils::SrvStop("Le serveur vien de s'eteindre le " . TimeUtils::GetActualTime());
 		// combat
 		foreach (Base::$pc as $playerName) {
 			unset(Base::$pc[$playerName]);
