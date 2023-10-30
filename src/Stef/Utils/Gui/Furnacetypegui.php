@@ -8,8 +8,9 @@ use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\type\graphic\InvMenuGraphic;
 use muqsit\invmenu\type\InvMenuType;
 use muqsit\invmenu\type\util\InvMenuTypeBuilders;
-use pocketmine\block\inventory\CraftingTableInventory;
+use pocketmine\block\inventory\FurnaceInventory;
 use pocketmine\block\VanillaBlocks;
+use pocketmine\crafting\FurnaceType;
 use pocketmine\inventory\Inventory;
 use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\types\inventory\WindowTypes;
@@ -33,6 +34,6 @@ final class Furnacetypegui implements InvMenuType{
 	}
 
 	public function createInventory() : Inventory{
-		return new CraftingTableInventory(Position::fromObject(Vector3::zero(), null));
+		return new FurnaceInventory(Position::fromObject(Vector3::zero(), null),FurnaceType::FURNACE());
 	}
 }

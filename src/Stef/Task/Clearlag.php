@@ -2,7 +2,7 @@
 
 namespace Stef\Task;
 
-use pocketmine\entity\Entity;
+
 use pocketmine\entity\object\ItemEntity;
 use pocketmine\scheduler\Task;
 use Stef\Base;

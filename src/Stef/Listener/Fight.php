@@ -10,7 +10,6 @@ use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\server\CommandEvent;
 use pocketmine\player\Player;
-use pocketmine\world\Position;
 use Stef\Base;
 
 class Fight implements Listener
@@ -46,15 +45,21 @@ private bool $allcmd = true;
 	{
 		$p = $e->getPlayer();
 		$cause = $p->getLastDamageCause();
+		Base::$back[$e->getPlayer()->getName()] = $e->getPlayer()->getPosition();
 		$c = $p->getLastDamageCause()->getCause();
 		if($c === EntityDamageEvent::CAUSE_FALL){
-			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " C'est cassé les jambes.");
+			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " c'est cassé les jambes.");
 		}
 		if($c === EntityDamageEvent::CAUSE_DROWNING){
-			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " N'avait plus de respiration.");
+			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " n'avait plus de respiration.");
+		}
+		if($c === EntityDamageEvent::CAUSE_FALLING_BLOCK){
+			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " c'est écrasé fatalement dans un block.");
+		}
+		if($c === EntityDamageEvent::CAUSE_SUFFOCATION){
+			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " a écouté sa voix (passé a traver les blocks).");
 		}
 		$e->setDeathMessage("");
-		$e->setDeathScreenMessage("Appuie sur résucité :) ");
 		if ($cause instanceof EntityDamageByEntityEvent) {
 			$damager = $cause->getDamager();
 			if ($damager instanceof Player) {

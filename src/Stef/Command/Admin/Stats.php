@@ -6,6 +6,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\defaults\VanillaCommand;
 use pocketmine\lang\Translatable;
 use pocketmine\player\Player;
+use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
 use Stef\Base;
 
@@ -29,7 +30,12 @@ if($sender instanceof Player){
 					}, array_filter($sender->getServer()->getOnlinePlayers(), function(Player $player) use ($sender) : bool{
 						return !($sender instanceof Player) || $sender->canSee($player);
 					}));
-                    $sender->sendMessage("§aListe des joueurs conéctée  " ."(".count($playerNames).")");
+                    $sender->sendMessage("Voici la liste des joueurs connectés sur le serveur " ."(§b".count($playerNames)."§r)");
+
+					$sender->sendMessage("§b ". implode("§r, §b", $playerNames));
+					$playerc = new Config(Base::getInstance()->getServer()->getDataPath(). "count.json", Config::JSON);
+					$playerCount = count($playerc->getAll());
+					$sender->sendMessage("§b". $playerCount . "§r joueurs uniques se sont déjà connectés au serveur");
                     break;
                 case "server":
 
@@ -80,8 +86,7 @@ if($sender instanceof Player){
             }
         }
     }else{
-        $cfg = Base::getInstance()->getConfig();
-        $sender->sendMessage($cfg->getNested("Message.perm"));
+        $sender->sendMessage(Base::NO_PERM);
     }
 }
 }

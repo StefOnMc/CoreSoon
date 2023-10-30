@@ -19,4 +19,5 @@ class InvmenuUtils
 		InvMenuHandler::getTypeRegistry()->register(self::INV_MENU_TYPE_FURNACE, new Furnacetypegui());
 		InvMenuHandler::getTypeRegistry()->register(self::INV_MENU_TYPE_WORKBENCH, new CraftTypegui());
 	}
+
 }

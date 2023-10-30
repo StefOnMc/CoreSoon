@@ -32,6 +32,8 @@ public function execute(CommandSender $sender, string $commandLabel, array $args
 					}
 				}
 			}
+		}else{
+			$sender->sendMessage(Base::NO_PERM);
 		}
 	}
 }

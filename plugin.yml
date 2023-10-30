@@ -28,3 +28,15 @@ permissions:
     default: true
   clear.use:
     default: op
+  eshop.use:
+    default: true
+  anvil.use:
+    default: op
+  wiki.use:
+    default: true
+  back.use:
+    default: op
+  say.use:
+    default: op
+  msg.use:
+    default: true

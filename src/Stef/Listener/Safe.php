@@ -3,6 +3,9 @@
 namespace Stef\Listener;
 
 use JsonException;
+use pocketmine\block\VanillaBlocks;
+use pocketmine\entity\effect\EffectInstance;
+use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityRegainHealthEvent;
 use pocketmine\event\Listener;
@@ -10,9 +13,11 @@ use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\player\PlayerQuitEvent;
+use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 use pocketmine\utils\Config;
 use Stef\Base;
+use Stef\Utils\WebhookUtils;
 
 class Safe implements Listener
 {
@@ -39,6 +44,8 @@ class Safe implements Listener
         }
 
     }
+
+
 
     public function Leave(PlayerQuitEvent $e): void
 	{
@@ -139,8 +146,25 @@ $e->cancel();
 			$entity->setNameTag("[$PPrank] " . $entity->getDisplayName() . " " . "\n§e" . "" . $percentage . "%");
 		}
 	}
-public function AntiHunger(PlayerMoveEvent $e){
+public function move(PlayerMoveEvent $e){
     $p = $e->getPlayer();
+	$world = $p->getLocation()->getWorld();
+	$pos = $p->getPosition();
+	$block = $world->getBlock($pos);
+	$direction = $p->getDirectionPlane()->normalize()->multiply(2);
+if($block->getTypeId() === VanillaBlocks::MANGROVE_PRESSURE_PLATE()->getTypeId()){
+	if($p->getEffects()->has(VanillaEffects::SPEED())){
+		$p->getEffects()->remove(VanillaEffects::SPEED());
+	}else{
+		$p->getEffects()->add(new EffectInstance(VanillaEffects::SPEED(),3*20,2));
+	}
+}
+if($block->getTypeId() === VanillaBlocks::OAK_PRESSURE_PLATE()->getTypeId()){
+$p->setHealth($p->getHealth());
+}
+if($block->getTypeId() === VanillaBlocks::ACACIA_PRESSURE_PLATE()->getTypeId()){
+	$p->setMotion(new Vector3($direction->getX(),1,$direction->getY()));
+}
     $p->getHungerManager()->addFood("20");
 }
 }

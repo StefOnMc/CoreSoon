@@ -21,7 +21,6 @@ public function __construct(string $name, Translatable|string $description = "",
 }
 public function execute(CommandSender $sender, string $commandLabel, array $args)
 {
-    $cfg = Base::getInstance()->getConfig();
     if($sender instanceof Player){
 
         if($sender->hasPermission("ec.use")){
@@ -34,7 +33,7 @@ public function execute(CommandSender $sender, string $commandLabel, array $args
             });
             $menu->send($sender);
         }else{
-            $sender->sendMessage($cfg->getNested("Message.perm"));
+            $sender->sendMessage(Base::NO_PERM);
         }
 
     }

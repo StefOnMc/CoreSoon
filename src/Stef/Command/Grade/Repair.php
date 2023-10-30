@@ -8,6 +8,7 @@ use pocketmine\command\defaults\VanillaCommand;
 use pocketmine\item\Durable;
 use pocketmine\lang\Translatable;
 use pocketmine\player\Player;
+use Stef\Base;
 
 
 class Repair extends VanillaCommand {
@@ -72,11 +73,11 @@ if($sender->hasPermission("repair.use")){
 				$this->addCooldown($player, $cooldownTime, true);
 			}
 		}else {
-			$sender->sendMessage("§cTu n'as pas la permissions.");
+			$sender->sendMessage(Base::NO_PERM);
 		}
 	}
 }else{
-	$sender->sendMessage("§c tu n'a pas la permissions");
+	$sender->sendMessage(Base::NO_PERM);
 }
 
 
