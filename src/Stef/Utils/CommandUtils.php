@@ -19,6 +19,10 @@ use Stef\Command\Joueur\Minage;
 use Stef\Command\Joueur\Msg;
 use Stef\Command\Joueur\Nv;
 use Stef\Command\Joueur\Spawn;
+use Stef\Command\Staff\Ban;
+use Stef\Command\Staff\Mute;
+use Stef\Command\Staff\Unban;
+use Stef\Command\Staff\Unmute;
 
 class CommandUtils
 {
@@ -30,6 +34,8 @@ class CommandUtils
 		Base::getInstance()->getServer()->getCommandMap()->unregister(Base::getInstance()->getServer()->getCommandMap()->getCommand("clear"));
 		Base::getInstance()->getServer()->getCommandMap()->unregister(Base::getInstance()->getServer()->getCommandMap()->getCommand("say"));
 		Base::getInstance()->getServer()->getCommandMap()->unregister(Base::getInstance()->getServer()->getCommandMap()->getCommand("msg"));
+		Base::getInstance()->getServer()->getCommandMap()->unregister(Base::getInstance()->getServer()->getCommandMap()->getCommand("ban"));
+		Base::getInstance()->getServer()->getCommandMap()->unregister(Base::getInstance()->getServer()->getCommandMap()->getCommand("unban"));
 	}
 
 	public static function Init()
@@ -39,7 +45,7 @@ class CommandUtils
 		self::RegisterRole();
 	}
 
-	private static function RegisterPlayer()
+	private static function RegisterPlayer(): void
 	{
 		$commands = [
 			new Nv("nv", "Avoir l'effet de night vision.", "/nv", []),
@@ -56,13 +62,17 @@ class CommandUtils
 		Base::getInstance()->getLogger()->info("Commande Joueur chargé: " . $commandCount);
 	}
 
-	private static function RegisterStaff()
+	private static function RegisterStaff(): void
 	{
 		$commands = [
 			new Stats("stats", "Voir les statistiques du serveur.", "/stats player & server", [""]),
 			new Info("info", "Voir les statistiques d'un joueur.", "/info joueur", [""]),
 			new Forceclear("forceclear", "Forcer le clearlag.", "/forceclear", ["fc"]),
 			new Say("say", "Faire une annonce.", "/say msg", []),
+			new Mute("mute","mute un joueur","/mute",[]),
+			new Unmute("unmute","unmute un joueur","/unmute",[]),
+			new Ban("ban","bannir un joueur","/ban joueur 1 jour",[]),
+			new Unban("unban","débanir un joueur","/unban joueur",[]),
 		];
 
 		Base::getInstance()->getServer()->getCommandMap()->registerAll(Base::PREFIX, $commands);
@@ -71,7 +81,7 @@ class CommandUtils
 		Base::getInstance()->getLogger()->info("Commande Staff chargé: " . $commandCount);
 	}
 
-	private static function RegisterRole()
+	private static function RegisterRole(): void
 	{
 		$commands = [
 			new Craft("craft", "Ouvre un établi.", "/craft", []),

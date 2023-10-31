@@ -40,3 +40,11 @@ permissions:
     default: op
   msg.use:
     default: true
+  mute.use:
+    default: op
+  unmute.use:
+    default: op
+  ban.use:
+    default: op
+  unban.use:
+    default: op

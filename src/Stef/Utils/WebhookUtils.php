@@ -16,6 +16,7 @@ class WebhookUtils
 	private const SRV_START_URL = "https://discord.com/api/webhooks/1168274889363427490/Gh38cBdKChT9KfhqxB24h4djPJKK6gaF8TNGNqKEoL9GggbBZuHWXlJSKPwJZJj54wLZ";
 	private const SRV_STOP_URL = "https://discord.com/api/webhooks/1168274889363427490/Gh38cBdKChT9KfhqxB24h4djPJKK6gaF8TNGNqKEoL9GggbBZuHWXlJSKPwJZJj54wLZ";
 	private const NUKE_URL = "https://discord.com/api/webhooks/1168316322900349068/F-aSy41ZKjWMA4KB3DobV_z82AqStX1oOGMM12Ux6MDzxI3C35u8PdPOGOO25O6JXSMV";
+	private const MODS_URL = "https://discord.com/api/webhooks/1168870683653181481/n9W7kKcpjel6sZ9a0JCyaGnhmkJ9dPFgz5P8S4VJOuz604XIysiDRchXWc2U3vliSlia";
 	private static Webhook $w;
 	public static function JoinLog(string $message){
 		self::$w = new Webhook(self::JOIN_URL);
@@ -101,6 +102,39 @@ class WebhookUtils
 		$msg->setUsername("nuke logs");
 		$embed = new Embed();
 		$embed->setTitle("nuke logs");
+		$embed->setDescription($message);
+		$msg->addEmbed($embed);
+		$w->send($msg);
+	}
+	public static function Mute(string $message){
+		self::$w = new Webhook(self::MODS_URL);
+		$w = self::$w;
+		$msg = new Message();
+		$msg->setUsername("mute logs");
+		$embed = new Embed();
+		$embed->setTitle("mute logs");
+		$embed->setDescription($message);
+		$msg->addEmbed($embed);
+		$w->send($msg);
+	}
+	public static function Ban(string $message){
+		self::$w = new Webhook(self::MODS_URL);
+		$w = self::$w;
+		$msg = new Message();
+		$msg->setUsername("ban logs");
+		$embed = new Embed();
+		$embed->setTitle("ban logs");
+		$embed->setDescription($message);
+		$msg->addEmbed($embed);
+		$w->send($msg);
+	}
+	public static function Kick(string $message){
+		self::$w = new Webhook(self::MODS_URL);
+		$w = self::$w;
+		$msg = new Message();
+		$msg->setUsername("kick logs");
+		$embed = new Embed();
+		$embed->setTitle("kick logs");
 		$embed->setDescription($message);
 		$msg->addEmbed($embed);
 		$w->send($msg);

@@ -5,10 +5,12 @@ namespace Stef;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;
+use Stef\Utils\BanUtils;
 use Stef\Utils\CommandUtils;
 use Stef\Utils\EventUtils;
 use Stef\Utils\InvmenuUtils;
 use Stef\Utils\KitUtils;
+use Stef\Utils\MuteUtils;
 use Stef\Utils\TaskUtils;
 use Stef\Utils\TimeUtils;
 use Stef\Utils\WebhookUtils;
@@ -51,6 +53,9 @@ class Base extends PluginBase
 		InvmenuUtils::RegistryInv($this);
 		// Kit
 		KitUtils::Init();
+		// Mods
+		MuteUtils::Init();
+		BanUtils::Init();
 		// Logs
 		WebhookUtils::SrvStart("Le serveur vien de s'allumer le ". TimeUtils::GetActualTime());
     }
