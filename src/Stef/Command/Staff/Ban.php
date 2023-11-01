@@ -41,9 +41,9 @@ class Ban extends VanillaCommand
 							}else{
 								if(is_numeric($args[1])){
 									$reason = implode(' ', array_slice($args, 3));
-									MuteUtils::setMute($t->getName(), $args[1], $args[2], $reason);
-									$time = MuteUtils::getTimes($t->getName());
-									$raison = MuteUtils::getMuteReason($t->getName());
+									BanUtils::setBan($t->getName(), $args[1], $args[2], $reason);
+									$time = BanUtils::getTimes($t->getName());
+									$raison = BanUtils::getBanReason($t->getName());
 									$t->kick("§cVous avez été ban par ". $sender->getName(). " pendant ". $time . " pour la raison ". $raison);
 									WebhookUtils::Ban("Ban de " .$t->getName()  ." de ". $args[1] ." ".$args[2] . " de la part de ".$sender->getName() . " pour la raison ". "$args[3]");
 								}else{

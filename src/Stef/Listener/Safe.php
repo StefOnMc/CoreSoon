@@ -23,7 +23,7 @@ class Safe implements Listener
 {
 	private array $cooldowns = [];
 private $purePerms;
-	private function onEntityDamage(EntityDamageEvent $event): void
+	public function onEntityDamage(EntityDamageEvent $event): void
 	{
 		$entity = $event->getEntity();
 		if ($entity instanceof Player) {
@@ -36,7 +36,7 @@ private $purePerms;
 			$entity->setNameTag("[$PPrank] ". $entity->getDisplayName() . " " . "\n§e" . "" . $percentage . "%");
 		}
 	}
-	private function getPlayerRank(Player $player): string{
+	public function getPlayerRank(Player $player): string{
 		$group = $this->purePerms->getUserDataMgr()->getData($player)['group'];
 
 		if($group !== null){
@@ -45,7 +45,7 @@ private $purePerms;
 			return "...";
 		}
 	}
-	private function Chat(PlayerChatEvent $e){
+	public function Chat(PlayerChatEvent $e){
 			$p = $e->getPlayer();
 			$msg = $e->getMessage();
  $psd = $p->getName();
@@ -104,7 +104,7 @@ $e->cancel();
 				}
 			}
 	}
-	private function regenareevent(EntityRegainHealthEvent $ev)
+	public function regenareevent(EntityRegainHealthEvent $ev)
 	{
 		$entity = $ev->getEntity();
 		if ($entity instanceof Player) {
@@ -117,7 +117,7 @@ $e->cancel();
 			$entity->setNameTag("[$PPrank] " . $entity->getDisplayName() . " " . "\n§e" . "" . $percentage . "%");
 		}
 	}
-private function move(PlayerMoveEvent $e){
+public function move(PlayerMoveEvent $e){
     $p = $e->getPlayer();
 	$world = $p->getLocation()->getWorld();
 	$pos = $p->getPosition();

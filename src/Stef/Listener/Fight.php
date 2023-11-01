@@ -4,8 +4,6 @@ namespace Stef\Listener;
 
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
-use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerQuitEvent;
@@ -24,7 +22,7 @@ private bool $allcmd = true;
 	/**
 	 * @priority HIGHEST
 	 */
-	private function onDamage(EntityDamageByEntityEvent $event): void
+	public function onDamage(EntityDamageByEntityEvent $event): void
 	{
 		$player = $event->getEntity();
 		$damager = $event->getDamager();
@@ -43,7 +41,7 @@ private bool $allcmd = true;
 		}
 	}
 
-	private function death(PlayerDeathEvent $e)
+	public function deathmoney(PlayerDeathEvent $e)
 	{
 		$p = $e->getPlayer();
 		$cause = $p->getLastDamageCause();
@@ -58,12 +56,7 @@ EconomyAPI::getInstance()->addMoney($damager,$luck);
 			}
 		}
 	}
-	private function skip(EntityDamageEvent $e){
-		if($e->getCause() === EntityDamageEvent::CAUSE_ENTITY_ATTACK){
-
-		}
-	}
-	private function onQuit(PlayerQuitEvent $event): void
+	public function onQuit(PlayerQuitEvent $event): void
 	{
 		$player = $event->getPlayer();
 		if (!isset(Base::$pc[$player->getName()])) return;
@@ -72,7 +65,7 @@ EconomyAPI::getInstance()->addMoney($damager,$luck);
 	}
 
 
-	private function OnCommand(CommandEvent $e): void
+	public function OnCommand(CommandEvent $e): void
 	{
 		$p = $e->getSender();
 		if (!isset(Base::$pc[$p->getName()])) return;

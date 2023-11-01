@@ -11,10 +11,6 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\server\CommandEvent;
 use pocketmine\event\server\DataPacketReceiveEvent;
-use pocketmine\event\server\DataPacketSendEvent;
-use pocketmine\network\mcpe\protocol\MovePlayerPacket;
-use pocketmine\network\mcpe\protocol\PlayerAuthInputPacket;
-use pocketmine\network\mcpe\protocol\ResourcePackStackPacket;
 use Stef\Base;
 use Stef\Utils\WebhookUtils;
 
@@ -40,17 +36,17 @@ class Logs implements Listener
 		];
 	/** @var float[] */
 	private $breakTimes = [];
-private function Join(PlayerJoinEvent $e){
+public function Join(PlayerJoinEvent $e){
 $ps = $e->getPlayer()->getName();
 
 WebhookUtils::JoinLog($ps ." vien de rejoindre le serveur.");
 }
 
-private function Quit(PlayerQuitEvent $e){
+public function Quit(PlayerQuitEvent $e){
 	$ps = $e->getPlayer()->getName();
 	WebhookUtils::QuitLog($ps. " vien de quitter le serveur.");
 }
-private function Chat(PlayerChatEvent $e){
+public function Chat(PlayerChatEvent $e){
 	$ps = $e->getPlayer()->getName();
 	$msg = $e->getMessage();
 	if($msg === "@here" or $msg === "@here" or $msg === "<@759389053937385492>" or $msg === "<@1012704749302325358>"){
@@ -59,12 +55,12 @@ Base::getInstance()->getLogger()->info("Attention : ". $ps ." et suspecté de sp
 		WebhookUtils::ChatLog($ps . " » ".$msg);
 	}
 }
-private function Command(CommandEvent $e){
+public function Command(CommandEvent $e){
 	$p = $e->getSender()->getName();
 	$cmd = $e->getCommand();
 	WebhookUtils::CommandsLog($p . " vien d'executer la commande /".$cmd);
 }
-private function DataPacketRecieve(DataPacketReceiveEvent $e){
+public function DataPacketRecieve(DataPacketReceiveEvent $e){
 $p = $e->getOrigin()->getDisplayName();
 $ps = $e->getPacket()->getName();
 	if (in_array($ps,self::PACKET)) {
@@ -74,12 +70,12 @@ $ps = $e->getPacket()->getName();
 		WebhookUtils::Packet_recieve($p . " a reçu le paquet " . $ps);
 	}
 }
-	private function onPlayerInteract(PlayerInteractEvent $event) : void{
+	public function onPlayerInteract(PlayerInteractEvent $event) : void{
 		if($event->getAction() === PlayerInteractEvent::LEFT_CLICK_BLOCK){
 			$this->breakTimes[$event->getPlayer()->getUniqueId()->getBytes()] = floor(microtime(true) * 20);
 		}
 	}
-	private function onBlockBreak(BlockBreakEvent $event) : void{
+	public function onBlockBreak(BlockBreakEvent $event) : void{
 		if(!$event->getInstaBreak()){
 			$player = $event->getPlayer();
 			if(!isset($this->breakTimes[$uuid = $player->getUniqueId()->getBytes()])){
@@ -114,7 +110,7 @@ $ps = $e->getPacket()->getName();
 		}
 	}
 
-	private function onPlayerQuit(PlayerQuitEvent $event) : void{
+	public function onPlayerQuit(PlayerQuitEvent $event) : void{
 		unset($this->breakTimes[$event->getPlayer()->getUniqueId()->getBytes()]);
 	}
 }

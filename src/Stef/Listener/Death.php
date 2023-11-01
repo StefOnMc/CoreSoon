@@ -11,7 +11,7 @@ use Stef\Base;
 
 class Death implements Listener
 {
-private function Customdeath(PlayerDeathEvent $e){
+public function Customdeath(PlayerDeathEvent $e){
 	$p = $e->getPlayer();
 	$c = $p->getLastDamageCause()->getCause();
 	if($c === EntityDamageEvent::CAUSE_FALL){
@@ -25,7 +25,7 @@ private function Customdeath(PlayerDeathEvent $e){
 	}
 }
 
-private function Death(EntityDamageEvent $e){
+public function Death(EntityDamageEvent $e){
 	$p = $e->getEntity();
 	$c = $e->getCause();
 	if($p instanceof Player){

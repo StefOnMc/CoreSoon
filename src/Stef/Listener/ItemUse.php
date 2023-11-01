@@ -22,7 +22,7 @@ class ItemUse implements Listener
 	private array $c3 = [];
 	private array $c4 = [];
 	private array $c5 = [];
-	private function checkItemHeld(Player $player, Item $item)
+	public function checkItemHeld(Player $player, Item $item)
 	{
 		$playerName = $player->getName();
 		$playerEffect = $player->getEffects();
@@ -36,29 +36,29 @@ class ItemUse implements Listener
 		}
 	}
 
-	private function Isonpickaxe(Player $player): bool
+	public function Isonpickaxe(Player $player): bool
 	{
 		return isset($this->c5[$player->getName()]);
 	}
 
-	private function itemHeld(PlayerItemHeldEvent $event)
+	public function itemHeld(PlayerItemHeldEvent $event)
 	{
 		$this->checkItemHeld($event->getPlayer(), $event->getItem());
 	}
 
-	private function playerJoinEvent(PlayerJoinEvent $event)
+	public function playerJoinEvent(PlayerJoinEvent $event)
 	{
 		$player = $event->getPlayer();
 		$this->checkItemHeld($player, $player->getInventory()->getItemInHand());
 	}
 
-	private function playerQuitEvent(PlayerQuitEvent $event)
+	public function playerQuitEvent(PlayerQuitEvent $event)
 	{
 		$player = $event->getPlayer();
 		$this->checkItemHeld($player, VanillaItems::AIR());
 	}
 
-	private function ItemUse(PlayerItemUseEvent $e){
+	public function ItemUse(PlayerItemUseEvent $e){
 $p = $e->getPlayer();
 $ps = $p->getName();
 $i = $e->getItem();

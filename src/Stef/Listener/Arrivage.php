@@ -14,7 +14,7 @@ class Arrivage implements Listener
 	/**
 	 * @throws \JsonException
 	 */
-	private function Join(PlayerJoinEvent $e): void
+	public function Join(PlayerJoinEvent $e): void
 	{
 		$p = $e->getPlayer();
 		$ps = $p->getName();
@@ -34,7 +34,7 @@ class Arrivage implements Listener
 
 
 
-	private function Leave(PlayerQuitEvent $e): void
+	public function Leave(PlayerQuitEvent $e): void
 	{
 		$e->setQuitMessage("");
 		Base::getInstance()->getServer()->broadcastPopup("§a+ ". $e->getPlayer()->getName(). " +");

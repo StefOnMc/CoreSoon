@@ -11,7 +11,7 @@ use Stef\Utils\Gui\EnchantGUI;
 class Open implements Listener
 {
 
-	private function interact(PlayerInteractEvent $e){
+	public function interact(PlayerInteractEvent $e){
 		$i = $e->getBlock()->getTypeId();
 		$p = $e->getPlayer();
 		if($e->getAction() === PlayerInteractEvent::RIGHT_CLICK_BLOCK){
