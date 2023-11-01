@@ -57,6 +57,7 @@ private $purePerms;
 				"xhamster",
 				"http://",
 				"https://",
+				"tukif.com",
 				"discord",
 			];
 
