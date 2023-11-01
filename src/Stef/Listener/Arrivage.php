@@ -20,7 +20,7 @@ class Arrivage implements Listener
 		$ps = $p->getName();
 		$e->setJoinMessage("");
 		if($p->hasPlayedBefore()){
-
+Base::getInstance()->getServer()->broadcastPopup("§a+ $ps +");
 		}else{
 			$playerc = new Config(Base::getInstance()->getServer()->getDataPath(). "count.json", Config::JSON);
 			$playerCount = count($playerc->getAll());
@@ -37,6 +37,6 @@ class Arrivage implements Listener
 	public function Leave(PlayerQuitEvent $e): void
 	{
 		$e->setQuitMessage("");
-		Base::getInstance()->getServer()->broadcastPopup("§a+ ". $e->getPlayer()->getName(). " +");
+		Base::getInstance()->getServer()->broadcastPopup("§c- ". $e->getPlayer()->getName(). " -");
 	}
 }
