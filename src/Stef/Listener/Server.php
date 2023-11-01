@@ -3,13 +3,10 @@
 namespace Stef\Listener;
 
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\event\server\DataPacketDecodeEvent;
 use pocketmine\event\server\QueryRegenerateEvent;
-use pocketmine\lang\KnownTranslationFactory;
 use pocketmine\network\mcpe\protocol\ProtocolInfo;
 use Stef\Base;
-use Stef\Utils\BanUtils;
 
 class Server implements Listener
 {
