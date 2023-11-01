@@ -22,37 +22,8 @@ use Stef\Utils\WebhookUtils;
 class Safe implements Listener
 {
 	private array $cooldowns = [];
-	private $purePerms;
-
-	/**
-	 * @throws JsonException
-	 */
-	public function Join(PlayerJoinEvent $e): void
-	{
-        $p = $e->getPlayer();
-        $ps = $p->getName();
-        $e->setJoinMessage("");
-        if($p->hasPlayedBefore()){
-
-        }else{
-            $playerc = new Config(Base::getInstance()->getServer()->getDataPath(). "count.json", Config::JSON);
-            $playerCount = count($playerc->getAll());
-            $playerCount++;
-            $playerc->set($playerCount);
-            $playerc->save();
-            Base::getInstance()->getServer()->broadcastMessage($ps . " Vien de rejoindre la premiere fois, il et le ". $playerCount . " eme inscrit");
-        }
-
-    }
-
-
-
-    public function Leave(PlayerQuitEvent $e): void
-	{
-        $e->setQuitMessage("");
-        Base::getInstance()->getServer()->broadcastPopup("§a+ ". $e->getPlayer()->getName(). " +");
-    }
-	public function onEntityDamage(EntityDamageEvent $event): void
+private $purePerms;
+	private function onEntityDamage(EntityDamageEvent $event): void
 	{
 		$entity = $event->getEntity();
 		if ($entity instanceof Player) {
@@ -65,7 +36,7 @@ class Safe implements Listener
 			$entity->setNameTag("[$PPrank] ". $entity->getDisplayName() . " " . "\n§e" . "" . $percentage . "%");
 		}
 	}
-	public function getPlayerRank(Player $player): string{
+	private function getPlayerRank(Player $player): string{
 		$group = $this->purePerms->getUserDataMgr()->getData($player)['group'];
 
 		if($group !== null){
@@ -74,7 +45,7 @@ class Safe implements Listener
 			return "...";
 		}
 	}
-	public function Chat(PlayerChatEvent $e){
+	private function Chat(PlayerChatEvent $e){
 			$p = $e->getPlayer();
 			$msg = $e->getMessage();
  $psd = $p->getName();
@@ -133,7 +104,7 @@ $e->cancel();
 				}
 			}
 	}
-	public function regenareevent(EntityRegainHealthEvent $ev)
+	private function regenareevent(EntityRegainHealthEvent $ev)
 	{
 		$entity = $ev->getEntity();
 		if ($entity instanceof Player) {
@@ -146,7 +117,7 @@ $e->cancel();
 			$entity->setNameTag("[$PPrank] " . $entity->getDisplayName() . " " . "\n§e" . "" . $percentage . "%");
 		}
 	}
-public function move(PlayerMoveEvent $e){
+private function move(PlayerMoveEvent $e){
     $p = $e->getPlayer();
 	$world = $p->getLocation()->getWorld();
 	$pos = $p->getPosition();

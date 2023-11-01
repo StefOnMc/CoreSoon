@@ -13,7 +13,6 @@ class MuteUtils
 		$mutePath = Base::getInstance()->getDataFolder() . "mute.yml";
 
 		if (!file_exists($mutePath)) {
-			// Si le fichier n'existe pas, créez-le avec un tableau vide en utilisant le format YAML.
 			file_put_contents($mutePath, "mutetime: []");
 		}
 

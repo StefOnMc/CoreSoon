@@ -10,7 +10,7 @@ use Stef\Utils\MuteUtils;
 
 class Modération implements Listener
 {
-public function chat(PlayerChatEvent $e){
+private function chat(PlayerChatEvent $e){
 	$p = $e->getPlayer();
 	$ps = $p->getName();
 	if(MuteUtils::hasMute($ps)){
@@ -20,7 +20,7 @@ public function chat(PlayerChatEvent $e){
 		$p->sendMessage("Tu es mute encore ".$time . " raison: ".$raison);
 	}
 }
-public function prelogin(PlayerPreLoginEvent $e){
+private function prelogin(PlayerPreLoginEvent $e){
 	$ps = $e->getPlayerInfo()->getUsername();
 	if(BanUtils::hasBan($ps)){
 		$time = BanUtils::getTimes($e->getPlayerInfo()->getUsername());

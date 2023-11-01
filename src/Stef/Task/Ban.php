@@ -3,8 +3,8 @@
 namespace Stef\Task;
 
 use pocketmine\scheduler\Task;
+use Stef\Base;
 use Stef\Utils\BanUtils;
-use Stef\Utils\MuteUtils;
 use Stef\Utils\WebhookUtils;
 
 class Ban extends Task
@@ -25,6 +25,7 @@ class Ban extends Task
 			if ($banTime <= 0) {
 				unset($banData[$player]);
 				WebhookUtils::Ban($player . " a été unban automatiquement. Raison : " . $reason);
+				Base::getInstance()->getLogger()->notice($player . " a été unban automatiquement. Raison :" . $reason);
 			} else {
 				$data["time"] = $banTime;
 				$banData[$player] = $data;

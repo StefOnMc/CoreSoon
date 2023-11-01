@@ -15,7 +15,7 @@ class WebhookUtils
 	private const PACKET_RECIEVE_URL = "https://discord.com/api/webhooks/1168275478331801630/g2qLByixI8ixRuodU_lRmAuxH5nLxejzXG_4OtX2LNXJXmYWCUpdYBbY0uZUzXFSrGAf";
 	private const SRV_START_URL = "https://discord.com/api/webhooks/1168274889363427490/Gh38cBdKChT9KfhqxB24h4djPJKK6gaF8TNGNqKEoL9GggbBZuHWXlJSKPwJZJj54wLZ";
 	private const SRV_STOP_URL = "https://discord.com/api/webhooks/1168274889363427490/Gh38cBdKChT9KfhqxB24h4djPJKK6gaF8TNGNqKEoL9GggbBZuHWXlJSKPwJZJj54wLZ";
-	private const NUKE_URL = "https://discord.com/api/webhooks/1168316322900349068/F-aSy41ZKjWMA4KB3DobV_z82AqStX1oOGMM12Ux6MDzxI3C35u8PdPOGOO25O6JXSMV";
+	private const CHEAT_URL = "https://discord.com/api/webhooks/1168316322900349068/F-aSy41ZKjWMA4KB3DobV_z82AqStX1oOGMM12Ux6MDzxI3C35u8PdPOGOO25O6JXSMV";
 	private const MODS_URL = "https://discord.com/api/webhooks/1168870683653181481/n9W7kKcpjel6sZ9a0JCyaGnhmkJ9dPFgz5P8S4VJOuz604XIysiDRchXWc2U3vliSlia";
 	private static Webhook $w;
 	public static function JoinLog(string $message){
@@ -96,7 +96,7 @@ class WebhookUtils
 		$w->send($msg);
 	}
 	public static function Nuke(string $message){
-		self::$w = new Webhook(self::NUKE_URL);
+		self::$w = new Webhook(self::CHEAT_URL);
 		$w = self::$w;
 		$msg = new Message();
 		$msg->setUsername("nuke logs");

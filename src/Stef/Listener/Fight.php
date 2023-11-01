@@ -5,6 +5,7 @@ namespace Stef\Listener;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerQuitEvent;
@@ -23,7 +24,7 @@ private bool $allcmd = true;
 	/**
 	 * @priority HIGHEST
 	 */
-	public function onDamage(EntityDamageByEntityEvent $event): void
+	private function onDamage(EntityDamageByEntityEvent $event): void
 	{
 		$player = $event->getEntity();
 		$damager = $event->getDamager();
@@ -41,25 +42,12 @@ private bool $allcmd = true;
 			Base::$pc[$player->getName()] = $this->time;
 		}
 	}
-	public function death(PlayerDeathEvent $e)
+
+	private function death(PlayerDeathEvent $e)
 	{
 		$p = $e->getPlayer();
 		$cause = $p->getLastDamageCause();
 		Base::$back[$e->getPlayer()->getName()] = $e->getPlayer()->getPosition();
-		$c = $p->getLastDamageCause()->getCause();
-		if($c === EntityDamageEvent::CAUSE_FALL){
-			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " c'est cassé les jambes.");
-		}
-		if($c === EntityDamageEvent::CAUSE_DROWNING){
-			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " n'avait plus de respiration.");
-		}
-		if($c === EntityDamageEvent::CAUSE_FALLING_BLOCK){
-			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " c'est écrasé fatalement dans un block.");
-		}
-		if($c === EntityDamageEvent::CAUSE_SUFFOCATION){
-			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " a écouté sa voix (passé a traver les blocks).");
-		}
-		$e->setDeathMessage("");
 		if ($cause instanceof EntityDamageByEntityEvent) {
 			$damager = $cause->getDamager();
 			if ($damager instanceof Player) {
@@ -70,7 +58,12 @@ EconomyAPI::getInstance()->addMoney($damager,$luck);
 			}
 		}
 	}
-	public function onQuit(PlayerQuitEvent $event): void
+	private function skip(EntityDamageEvent $e){
+		if($e->getCause() === EntityDamageEvent::CAUSE_ENTITY_ATTACK){
+
+		}
+	}
+	private function onQuit(PlayerQuitEvent $event): void
 	{
 		$player = $event->getPlayer();
 		if (!isset(Base::$pc[$player->getName()])) return;
@@ -79,7 +72,7 @@ EconomyAPI::getInstance()->addMoney($damager,$luck);
 	}
 
 
-	public function OnCommand(CommandEvent $e): void
+	private function OnCommand(CommandEvent $e): void
 	{
 		$p = $e->getSender();
 		if (!isset(Base::$pc[$p->getName()])) return;

@@ -2,7 +2,6 @@
 
 namespace Stef\Utils;
 
-use pocketmine\player\Player;
 use pocketmine\utils\Config;
 use Stef\Base;
 

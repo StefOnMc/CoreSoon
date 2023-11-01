@@ -29,8 +29,8 @@ public function execute(CommandSender $sender, string $commandLabel, array $args
 				}else{
 
 				}
-				$c = implode(" ", array_slice($args, 2)); // On implode les éléments à partir de $args[2]
-				$cs = $args[1] . ' ' . $c; // On ajoute $args[1] au début de la chaîne
+				$c = implode(" ", array_slice($args, 2));
+				$cs = $args[1] . ' ' . $c;
 				WebhookUtils::Kick($t->getName(). " vien de se faire éjecter par ". $sender->getName() ." pour la raison ". $cs);
 				$t->kick($cs . " par ". $sender->getName());
 			}

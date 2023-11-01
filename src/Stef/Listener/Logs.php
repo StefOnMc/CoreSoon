@@ -40,31 +40,31 @@ class Logs implements Listener
 		];
 	/** @var float[] */
 	private $breakTimes = [];
-public function Join(PlayerJoinEvent $e){
+private function Join(PlayerJoinEvent $e){
 $ps = $e->getPlayer()->getName();
 
 WebhookUtils::JoinLog($ps ." vien de rejoindre le serveur.");
 }
 
-public function Quit(PlayerQuitEvent $e){
+private function Quit(PlayerQuitEvent $e){
 	$ps = $e->getPlayer()->getName();
 	WebhookUtils::QuitLog($ps. " vien de quitter le serveur.");
 }
-public function Chat(PlayerChatEvent $e){
+private function Chat(PlayerChatEvent $e){
 	$ps = $e->getPlayer()->getName();
 	$msg = $e->getMessage();
 	if($msg === "@here" or $msg === "@here" or $msg === "<@759389053937385492>" or $msg === "<@1012704749302325358>"){
-Base::getInstance()->getLogger()->critical("Attention : ". $ps ." suspecté de spam de mention.");
+Base::getInstance()->getLogger()->info("Attention : ". $ps ." et suspecté de spam de mention.");
 	}else{
 		WebhookUtils::ChatLog($ps . " » ".$msg);
 	}
 }
-public function Command(CommandEvent $e){
+private function Command(CommandEvent $e){
 	$p = $e->getSender()->getName();
 	$cmd = $e->getCommand();
 	WebhookUtils::CommandsLog($p . " vien d'executer la commande /".$cmd);
 }
-public function DataPacketRecieve(DataPacketReceiveEvent $e){
+private function DataPacketRecieve(DataPacketReceiveEvent $e){
 $p = $e->getOrigin()->getDisplayName();
 $ps = $e->getPacket()->getName();
 	if (in_array($ps,self::PACKET)) {
@@ -74,12 +74,12 @@ $ps = $e->getPacket()->getName();
 		WebhookUtils::Packet_recieve($p . " a reçu le paquet " . $ps);
 	}
 }
-	public function onPlayerInteract(PlayerInteractEvent $event) : void{
+	private function onPlayerInteract(PlayerInteractEvent $event) : void{
 		if($event->getAction() === PlayerInteractEvent::LEFT_CLICK_BLOCK){
 			$this->breakTimes[$event->getPlayer()->getUniqueId()->getBytes()] = floor(microtime(true) * 20);
 		}
 	}
-	public function onBlockBreak(BlockBreakEvent $event) : void{
+	private function onBlockBreak(BlockBreakEvent $event) : void{
 		if(!$event->getInstaBreak()){
 			$player = $event->getPlayer();
 			if(!isset($this->breakTimes[$uuid = $player->getUniqueId()->getBytes()])){
@@ -114,7 +114,7 @@ $ps = $e->getPacket()->getName();
 		}
 	}
 
-	public function onPlayerQuit(PlayerQuitEvent $event) : void{
+	private function onPlayerQuit(PlayerQuitEvent $event) : void{
 		unset($this->breakTimes[$event->getPlayer()->getUniqueId()->getBytes()]);
 	}
 }

@@ -3,7 +3,6 @@
 namespace Stef;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;
 use Stef\Utils\BanUtils;
 use Stef\Utils\CommandUtils;
