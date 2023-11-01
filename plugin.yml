@@ -3,6 +3,9 @@ main: Stef\Base
 api: 5.0.0
 version: BETA
 author: zecolik
+depends:
+  - Pureperms
+  - EconomyAPI
 permissions:
   ec.use:
     default: op
