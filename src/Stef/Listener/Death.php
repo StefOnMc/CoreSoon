@@ -30,6 +30,7 @@ public function Death(EntityDamageEvent $e){
 	$c = $e->getCause();
 	if($p instanceof Player){
 		if($c === EntityDamageEvent::CAUSE_VOID){
+			$e->cancel();
 			$p->teleport(new Position(9,80,90,Base::getInstance()->getServer()->getWorldManager()->getWorldByName("world")));
 			$p->sendMessage("§aVous avez esseyer de sauté dans le void.");
 			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName() . " a sauté dans le vide.");
