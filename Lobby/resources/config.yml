@@ -1,0 +1,43 @@
+---
+Logger:
+  Enable: "Lobby Chargé"
+  Disable: "Lobby Déchargé"
+Network:
+  Name: "§aSoon"
+  Ip: "soon.fr"
+  Port: 19132
+Welcome:
+  Join: "§a + {player} +"
+  Quit: "§c - {player} -"
+  Bvn: "Bienvenue au Lobby  discord.gg/..."
+Broadcast:
+  - "oeeee"
+  - "Cimerrr"
+  - "zbi"
+Inventory:
+  Pearl:
+    Case: 5
+    Name: "§e Pearl"
+  Compass:
+    Case: 6
+    Name: "§eBousolle"
+Denied:
+  no-break: "Il n'est pas possible de cassé des blocks."
+  no-place: "§cIl n'est pas possible de placé des blocks."
+  no-pvp: "§cLe pvp et interdit."
+  no-drop: "§cImposible de drop les items."
+  no-void: "§aVous avez été téleporté automatiquement au spawn."
+  # Pour le void
+Spawn:
+ X: 2
+ Y: 90
+ Z: 2
+ World: "world"
+Form-compass:
+  name: "Menu des serveur"
+  button: "§eKitmap"
+  close: "§cVous avez bien fermé le formulaire."
+Perm:
+  BlockPlace: "place.use"
+  BlockBreak: "break.use"
+...
