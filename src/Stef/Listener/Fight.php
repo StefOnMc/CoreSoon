@@ -29,6 +29,7 @@ private bool $allcmd = true;
 // kb
 		$event->setKnockBack(2.3);
 		$event->setAttackCooldown(2);
+		$event->setVerticalKnockBackLimit(2);
 		if ($event->isCancelled()) return;
 		if (!$player instanceof Player || !$damager instanceof Player) return;
 		if ($player->isCreative() || $damager->isCreative()) return;
