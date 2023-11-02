@@ -139,4 +139,15 @@ class WebhookUtils
 		$msg->addEmbed($embed);
 		$w->send($msg);
 	}
+	public static function Reach(string $message){
+		self::$w = new Webhook(self::CHEAT_URL);
+		$w = self::$w;
+		$msg = new Message();
+		$msg->setUsername("reach logs");
+		$embed = new Embed();
+		$embed->setTitle("reach logs");
+		$embed->setDescription($message);
+		$msg->addEmbed($embed);
+		$w->send($msg);
+	}
 }
