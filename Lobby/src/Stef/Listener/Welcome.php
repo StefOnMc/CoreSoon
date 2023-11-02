@@ -15,7 +15,6 @@ public function Join(PlayerJoinEvent $e){
 	$p = $e->getPlayer();
 	$e->setJoinMessage("");
 	$inv = $p->getInventory();
-	ScoreBoardUtils::
 	$inv->clearAll();
 	$inv->setItem(Loader::getInstance()->getConfig()->getNested("Inventory.Pearl.Case"),VanillaItems::ENDER_PEARL()->setCustomName(Loader::getInstance()->getConfig()->getNested("Inventory.Pearl.Name")));
 	$inv->setItem(Loader::getInstance()->getConfig()->getNested("Inventory.Compass.Case"),VanillaItems::COMPASS()->setCustomName(Loader::getInstance()->getConfig()->getNested("Inventory.Compass.Name")));
