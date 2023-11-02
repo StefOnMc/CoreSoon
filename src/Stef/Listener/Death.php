@@ -13,15 +13,17 @@ class Death implements Listener
 {
 public function Customdeath(PlayerDeathEvent $e){
 	$p = $e->getPlayer();
+	$e->setDeathMessage("");
 	$c = $p->getLastDamageCause()->getCause();
-	if($c === EntityDamageEvent::CAUSE_FALL){
-		Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " c'est cassé les jambes.");
-	}
-	if($c === EntityDamageEvent::CAUSE_DROWNING){
-		Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " n'avait plus de respiration.");
-	}
-	if($c === EntityDamageEvent::CAUSE_FALLING_BLOCK){
-		Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " c'est écrasé fatalement dans un block.");
+		if($c === EntityDamageEvent::CAUSE_FALL){
+			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " c'est cassé les jambes.");
+		}
+		if($c === EntityDamageEvent::CAUSE_DROWNING){
+			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " n'avait plus de respiration.");
+		}
+		if($c === EntityDamageEvent::CAUSE_FALLING_BLOCK){
+			Base::getInstance()->getServer()->broadcastMessage("§c".$p->getName(). " c'est écrasé fatalement dans un block.");
+		}
 	}
 }
 
