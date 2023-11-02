@@ -10,6 +10,7 @@ use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\server\CommandEvent;
 use pocketmine\player\Player;
 use Stef\Base;
+use Stef\Utils\WebhookUtils;
 
 class Fight implements Listener
 {
@@ -27,17 +28,22 @@ private bool $allcmd = true;
 		$player = $event->getEntity();
 		$damager = $event->getDamager();
 // kb
-		$event->setKnockBack(2.3);
-		$event->setAttackCooldown(2);
-		$event->setVerticalKnockBackLimit(2);
+		$event->setKnockBack(0.520);
+		$event->setAttackCooldown(0);
+		$event->setVerticalKnockBackLimit(2.1);
 		if ($event->isCancelled()) return;
 		if (!$player instanceof Player || !$damager instanceof Player) return;
 		if ($player->isCreative() || $damager->isCreative()) return;
+		$reachThreshold = 5;
+		if($damager->getPosition()->distance($player->getPosition()) > $reachThreshold){
+			WebhookUtils::Reach($damager->getName() . " a une reach de ". round($damager->getPosition()->distance($player->getPosition())));
+		}
+
 		foreach ([$player, $damager] as $player)
 		{
 			if (!isset(Base::$pc[$player->getName()]))
 			{
-				$player->sendMessage("§aVous êtes en combat.");
+				$player->sendMessage("§cVous êtes en combat.");
 				$player->sendMessage("§c La déconexion et pas authorisé sous peine de perte de l'inventaire .");
 			}
 			Base::$pc[$player->getName()] = $this->time;
