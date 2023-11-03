@@ -55,6 +55,16 @@ class MuteUtils
 
 		return 0;
 	}
+	public static function getMutedPlayers() {
+		$muteData = self::$mute->get("mutetime", []);
+
+		$mutedPlayers = [];
+		foreach ($muteData as $playerName => $muteInfo) {
+			$mutedPlayers[] = $playerName;
+		}
+
+		return $mutedPlayers;
+	}
 
 	public static function getMuteReason(string $name) {
 		$muteData = self::$mute->get("mutetime", []);

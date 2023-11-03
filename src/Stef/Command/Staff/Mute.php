@@ -43,6 +43,7 @@ public function execute(CommandSender $sender, string $commandLabel, array $args
 								MuteUtils::setMute($t->getName(), $args[1], $args[2], $reason);
 								$time = MuteUtils::getTimes($t->getName());
 								$raison = MuteUtils::getMuteReason($t->getName());
+								$sender->sendMessage("§aVous avez bien mute ". $t->getName() . " pendant ". $time . " pour la raison " . $reason);
 								$t->sendMessage("§cVous avez été mute par ". $sender->getName(). " pendant ". $time . " pour la raison ". $raison);
 								WebhookUtils::Mute("Mute de " .$t->getName()  ." de ". $args[1] ." ".$args[2] . " de la part de ".$sender->getName() . " pour la raison ". "$args[3]");
 							}else{

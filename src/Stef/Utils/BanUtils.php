@@ -46,6 +46,16 @@ class BanUtils
 
 		self::setBans($playerName, $seconds, $reason);
 	}
+	public static function getBannedPlayers() {
+		$banData = self::$ban->get("bantime", []);
+		$banPlayers = [];
+		foreach ($banData as $playerName => $banInfo) {
+			$banPlayers[] = $playerName;
+		}
+
+		return $banPlayers;
+	}
+
 
 	public static function getTimes(string $name) {
 		$banData = self::$ban->get("bantime", []);

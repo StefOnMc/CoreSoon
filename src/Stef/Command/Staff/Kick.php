@@ -31,6 +31,7 @@ public function execute(CommandSender $sender, string $commandLabel, array $args
 				}
 				$c = implode(" ", array_slice($args, 2));
 				$cs = $args[1] . ' ' . $c;
+				$sender->sendMessage("§aVous avez bien kick ". $t->getName() . " pour la raison " . $cs);
 				WebhookUtils::Kick($t->getName(). " vien de se faire éjecter par ". $sender->getName() ." pour la raison ". $cs);
 				$t->kick($cs . " par ". $sender->getName());
 			}

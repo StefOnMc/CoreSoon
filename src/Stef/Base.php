@@ -4,9 +4,11 @@ namespace Stef;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
+use pocketmine\world\World;
 use Stef\Utils\BanUtils;
 use Stef\Utils\CommandUtils;
 use Stef\Utils\EventUtils;
+use Stef\Utils\Gui\DevGUI;
 use Stef\Utils\InvmenuUtils;
 use Stef\Utils\KitUtils;
 use Stef\Utils\MuteUtils;
@@ -44,6 +46,17 @@ class Base extends PluginBase
        $this->getLogger()->notice("Core chargé.");
 	   // command
        CommandUtils::Init();
+		if(DevGUI::$day === false){
+			DevGUI::$day = true;
+			foreach(Base::getInstance()->getServer()->getWorldManager()->getWorlds() as $w){
+				$w->setTime(World::TIME_DAY);
+				$w->stopTime();
+			}
+		}else{
+			foreach(Base::getInstance()->getServer()->getWorldManager()->getWorlds() as $w){
+				$w->startTime();
+			}
+		}
 	   // event
 		EventUtils::RegistryEvent($this);
 		// task
