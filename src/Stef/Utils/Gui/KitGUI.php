@@ -122,10 +122,10 @@ public static function send(Player $sender){
 					if($sender->getInventory()->canAddItem(VanillaItems::COPPER_INGOT())){
 						KitUtils::setCooldown($sender->getName(),6,"heure","star");
 						$sender->sendMessage("§aVous avez bien claim le kit §eStar");
+						// item
 					}else{
 						$sender->sendMessage("vous ne pouvez pas récupéré");
 					}
-					// item
 				}
 				$kit->onClose($sender);
 			}else{

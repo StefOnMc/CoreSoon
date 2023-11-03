@@ -20,6 +20,5 @@ public static function RegistryTask(){
 	Base::getInstance()->getScheduler()->scheduleRepeatingTask(new Kit(),20);
 	Combat::combatTask();
 	Message::MsgTask();
-	AutoRestart::Start();
 }
 }

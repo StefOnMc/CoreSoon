@@ -18,11 +18,11 @@ class Base extends PluginBase
 {
     use SingletonTrait;
 
-	const PREFIX =  "§a Soon §c » ";
-	const NO_PERM= "§c Vous n'avez pas la permission.";
-	public bool $joinop = false;
-	public bool $creativedirect = false;
-	// combat jsp illogique php
+	const PREFIX = "§a Soon §c » ";
+	const IP = "soon.fr";
+	const PORT = 19132;
+
+	const NO_PERM = "§c Vous n'avez pas la permission.";
 	public static array $pc = [];
 	public static array $back = [];
 	// aussi

@@ -4,6 +4,7 @@ namespace Stef\Listener;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
+use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\player\PlayerPreLoginEvent;
 use Stef\Base;
 use Stef\Utils\BanUtils;

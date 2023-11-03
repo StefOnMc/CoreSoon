@@ -3,8 +3,10 @@
 namespace Stef\Utils;
 
 use Stef\Base;
+use Stef\Command\Admin\Dev;
 use Stef\Command\Admin\Forceclear;
 use Stef\Command\Admin\Info;
+use Stef\Command\Admin\Restart;
 use Stef\Command\Admin\Say;
 use Stef\Command\Admin\Stats;
 use Stef\Command\Grade\Back;
@@ -73,6 +75,8 @@ class CommandUtils
 			new Unmute("unmute","unmute un joueur","/unmute",[]),
 			new Ban("ban","bannir un joueur","/ban joueur 1 jour",[]),
 			new Unban("unban","débanir un joueur","/unban joueur",[]),
+			new Restart("restart","redémaré le serveur.","/restart",[]),
+			new Dev("dev","menu admin","/dev",[]),
 		];
 
 		Base::getInstance()->getServer()->getCommandMap()->registerAll(Base::PREFIX, $commands);
