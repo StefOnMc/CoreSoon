@@ -46,6 +46,7 @@ class Ban extends VanillaCommand
 									$raison = BanUtils::getBanReason($t->getName());
 									$sender->sendMessage("§aVous avez bien ban ". $t->getName() . " pendant ". $time . " pour la raison " . $reason);
 									$t->kick("§cVous avez été ban par ". $sender->getName(). " pendant ". $time . " pour la raison ". $raison);
+									Base::getInstance()->getServer()->broadcastMessage($t->getName() . " vien de se faire bannir par ". $sender->getName() . " pour la raison ".$raison);
 									WebhookUtils::Ban("Ban de " .$t->getName()  ." de ". $args[1] ." ".$args[2] . " de la part de ".$sender->getName() . " pour la raison ". "$args[3]");
 								}else{
 									$sender->sendMessage("§cil faut que se soit en chiffre");
@@ -56,6 +57,35 @@ class Ban extends VanillaCommand
 				}
 			}else{
 				$sender->sendMessage(Base::NO_PERM);
+			}
+		}else{
+			$t = Base::getInstance()->getServer()->getPlayerByPrefix($args[0]);
+			if($t === null){
+				$sender->sendMessage("§cLe joueur spécifié et hors ligne.");
+			}else{
+				if(BanUtils::hasBan($t->getName())){
+					$sender->sendMessage($t->getName() . " et déja ban.");
+				}else{
+					if(empty($args[0]) ||empty($args[1]) ||empty($args[2]) || empty($args[3])){
+						if(empty($args[2])){
+							$sender->sendMessage("§cannée/mois/jour/heure/minutes/seconde");
+						}
+						$sender->sendMessage("§c/ban joueur 1 année/mois/jour/heure/minutes/seconde raison");
+					}else{
+						if(is_numeric($args[1])){
+							$reason = implode(' ', array_slice($args, 3));
+							BanUtils::setBan($t->getName(), $args[1], $args[2], $reason);
+							$time = BanUtils::getTimes($t->getName());
+							$raison = BanUtils::getBanReason($t->getName());
+							$sender->sendMessage("§aVous avez bien ban ". $t->getName() . " pendant ". $time . " pour la raison " . $reason);
+							$t->kick("§cVous avez été ban par ". $sender->getName(). " pendant ". $time . " pour la raison ". $raison);
+							Base::getInstance()->getServer()->broadcastMessage($t->getName() . " vien de se faire bannir par ". $sender->getName() . " pour la raison ".$raison);
+							WebhookUtils::Ban("Ban de " .$t->getName()  ." de ". $args[1] ." ".$args[2] . " de la part de ".$sender->getName() . " pour la raison ". "$args[3]");
+						}else{
+							$sender->sendMessage("§cil faut que se soit en chiffre");
+						}
+					}
+				}
 			}
 		}
 	}

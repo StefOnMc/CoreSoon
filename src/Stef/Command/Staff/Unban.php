@@ -34,6 +34,15 @@ class Unban extends VanillaCommand
 			}else{
 				$sender->sendMessage(Base::NO_PERM);
 			}
+		}else{
+			$t = Base::getInstance()->getServer()->getPlayerByPrefix($args[0]);
+			if($t === null){
+				$sender->sendMessage("§cLe joueur spécifié et hors ligne.");
+			}else{
+				BanUtils::Unban($t->getName());
+				WebhookUtils::Ban($sender->getName() . " a unban ". $t->getName());
+				$sender->sendMessage("§aVous avez bien unban ". $t->getName());
+			}
 		}
 	}
 }

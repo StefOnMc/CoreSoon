@@ -24,19 +24,27 @@ public function execute(CommandSender $sender, string $commandLabel, array $args
 			if($t === null){
 
 			}else{
-				if(is_numeric($args[1])){
-
-				}else{
-
-				}
-				$c = implode(" ", array_slice($args, 2));
-				$cs = $args[1] . ' ' . $c;
-				$sender->sendMessage("§aVous avez bien kick ". $t->getName() . " pour la raison " . $cs);
-				WebhookUtils::Kick($t->getName(). " vien de se faire éjecter par ". $sender->getName() ." pour la raison ". $cs);
-				$t->kick($cs . " par ". $sender->getName());
+					$c = implode(" ", array_slice($args, 2));
+					$cs = $args[1] . ' ' . $c;
+					$sender->sendMessage("§aVous avez bien kick ". $t->getName() . " pour la raison " . $cs);
+					Base::getInstance()->getServer()->broadcastMessage($t->getName() . " vien de se faire éjecter par ". $sender->getName() . " pour la raison ".$cs);
+					WebhookUtils::Kick($t->getName(). " vien de se faire éjecter par ". $sender->getName() ." pour la raison ". $cs);
+					$t->kick("vous avez été kick pour ". $cs . " par ". $sender->getName());
 			}
 		}else{
 			$sender->sendMessage(Base::NO_PERM);
+		}
+	}else{
+		$t = Base::getInstance()->getServer()->getPlayerByPrefix($args[0]);
+		if($t === null){
+
+		}else{
+			$c = implode(" ", array_slice($args, 2));
+			$cs = $args[1] . ' ' . $c;
+			$sender->sendMessage("§aVous avez bien kick ". $t->getName() . " pour la raison " . $cs);
+			Base::getInstance()->getServer()->broadcastMessage($t->getName() . " vien de se faire éjecter par ". $sender->getName() . " pour la raison ".$cs);
+			WebhookUtils::Kick($t->getName(). " vien de se faire éjecter par ". $sender->getName() ." pour la raison ". $cs);
+			$t->kick("vous avez été kick pour ". $cs . " par ". $sender->getName());
 		}
 	}
 }

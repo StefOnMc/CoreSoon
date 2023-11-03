@@ -24,6 +24,9 @@ public function execute(CommandSender $sender, string $commandLabel, array $args
 		}else{
 			$sender->sendMessage(Base::NO_PERM);
 		}
+	}else{
+		$sender->sendMessage("restart lancé.");
+		Base::getInstance()->getScheduler()->scheduleRepeatingTask(new \Stef\Task\Restart(),20);
 	}
 }
 }

@@ -31,6 +31,14 @@ public function execute(CommandSender $sender, string $commandLabel, array $args
 		}else{
 			$sender->sendMessage(Base::NO_PERM);
 		}
+	}else{
+		$t = Base::getInstance()->getServer()->getPlayerByPrefix($args[0]);
+		if($t === null){
+			$sender->sendMessage("§cLe joueur spécifié et hors ligne.");
+		}else{
+			MuteUtils::Unmute($t->getName());
+			$sender->sendMessage("§aVous avez bien unmute ". $t->getName());
+		}
 	}
 }
 }
