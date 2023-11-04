@@ -27,6 +27,8 @@ class DevGUI
 public static function Send(Player $p){
 	$dev = InvMenu::create(InvMenu::TYPE_CHEST);
 	$dev->setName("§c - §9French§r§f-§cDev -");
+	$MuteList = MuteUtils::getMutedPlayers();
+	$banList = BanUtils::getBannedPlayers();
 	$dev->getInventory()->setItem(1,VanillaBlocks::STAINED_GLASS()->setColor(DyeColor::BLUE())->asItem());
 	$dev->getInventory()->setItem(9,VanillaBlocks::STAINED_GLASS()->setColor(DyeColor::BLUE())->asItem());
 	$dev->getInventory()->setItem(0,VanillaBlocks::STAINED_GLASS()->setColor(DyeColor::BLUE())->asItem());
@@ -38,9 +40,9 @@ public static function Send(Player $p){
 	$dev->getInventory()->setItem(23,VanillaBlocks::STAINED_GLASS()->setColor(DyeColor::WHITE())->asItem());
 	$dev->getInventory()->setItem(10,VanillaItems::COMPASS()->setCustomName("§6- §cServeur §6-"));
 	$dev->getInventory()->setItem(13,VanillaItems::DIAMOND_AXE()->addEnchantment(new EnchantmentInstance(VanillaEnchantments::UNBREAKING(),10))->setCustomName("§o§cRestart")->setLore(["§ctqt sa va pas exploser le serveur."]));
-	$dev->getInventory()->setItem(16,VanillaBlocks::MOB_HEAD()->setMobHeadType(MobHeadType::PLAYER())->asItem()->setCustomName("§6- §aJoueur §6-"));
-	$dev->getInventory()->setItem(2,VanillaItems::POTION()->setCustomName("§6- §cListe des joueurs banni §6-"));
-	$dev->getInventory()->setItem(6,VanillaItems::ENDER_PEARL()->setCustomName("§6- §cListe des joueurs mutes §6-"));
+	$dev->getInventory()->setItem(16,VanillaBlocks::MOB_HEAD()->setMobHeadType(MobHeadType::DRAGON())->asItem()->setCustomName("§6- §aJoueur §6-"));
+	$dev->getInventory()->setItem(2,VanillaItems::POTION()->setCustomName("§6- §cListe des joueurs banni §6-")->setLore(["Joueur actuelement banni: \n". count($banList)]));
+	$dev->getInventory()->setItem(6,VanillaItems::ENDER_PEARL()->setCustomName("§6- §cListe des joueurs mutes §6-")->setLore(["Joueur actuelement mute: \n". count($MuteList)]));
 	if(self::$wl === true){
 		$dev->getInventory()->setItem(12,VanillaItems::GOLDEN_SWORD()->setCustomName("§7- §r§fWhitelist §7-")->setLore(["§3Status: §aActivé."]));
 	}else{

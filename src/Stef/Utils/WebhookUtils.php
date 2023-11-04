@@ -17,8 +17,9 @@ class WebhookUtils
 	private const SRV_STOP_URL = "https://discord.com/api/webhooks/1168274889363427490/Gh38cBdKChT9KfhqxB24h4djPJKK6gaF8TNGNqKEoL9GggbBZuHWXlJSKPwJZJj54wLZ";
 	private const CHEAT_URL = "https://discord.com/api/webhooks/1168316322900349068/F-aSy41ZKjWMA4KB3DobV_z82AqStX1oOGMM12Ux6MDzxI3C35u8PdPOGOO25O6JXSMV";
 	private const MODS_URL = "https://discord.com/api/webhooks/1168870683653181481/n9W7kKcpjel6sZ9a0JCyaGnhmkJ9dPFgz5P8S4VJOuz604XIysiDRchXWc2U3vliSlia";
+	private const EVENT_URL = "https://discord.com/api/webhooks/1170151632621817856/yTHNGfyOkscb2QGD05kRgobWD89CwxtAC4JK82By2W7Atp373d4AGfMX1YjMinW7isW_";
 	private static Webhook $w;
-	public static function JoinLog(string $message){
+	public static function Join(string $message){
 		self::$w = new Webhook(self::JOIN_URL);
 		$w = self::$w;
 		$msg = new Message();
@@ -29,7 +30,7 @@ class WebhookUtils
 		$msg->addEmbed($embed);
 		$w->send($msg);
 	}
-	public static function QuitLog(string $message){
+	public static function Quit(string $message){
 		self::$w = new Webhook(self::QUIT_URL);
 		$w = self::$w;
 		$msg = new Message();
@@ -40,7 +41,7 @@ class WebhookUtils
 		$msg->addEmbed($embed);
 		$w->send($msg);
 	}
-	public static function ChatLog(string $message){
+	public static function Chat(string $message){
 		self::$w = new Webhook(self::CHAT_URL);
 		$w = self::$w;
 		$msg = new Message();
@@ -51,7 +52,7 @@ class WebhookUtils
 		$msg->addEmbed($embed);
 		$w->send($msg);
 	}
-	public static function CommandsLog(string $message){
+	public static function Commands(string $message){
 		self::$w = new Webhook(self::COMMAND_URL);
 		$w = self::$w;
 		$msg = new Message();
@@ -146,6 +147,40 @@ class WebhookUtils
 		$msg->setUsername("reach logs");
 		$embed = new Embed();
 		$embed->setTitle("reach logs");
+		$embed->setDescription($message);
+		$msg->addEmbed($embed);
+		$w->send($msg);
+	}
+	public static function Koth(string $message){
+		self::$w = new Webhook(self::EVENT_URL);
+		$w = self::$w;
+		$msg = new Message();
+		$msg->setUsername("koth event");
+		$embed = new Embed();
+		$embed->setTitle("koth event");
+		$embed->setDescription($message);
+		$msg->addEmbed($embed);
+		$w->send($msg);
+	}
+	public static function Nexus(string $message){
+		self::$w = new Webhook(self::EVENT_URL);
+		$w = self::$w;
+		$msg = new Message();
+		$msg->setUsername("nexus event");
+		$embed = new Embed();
+		$embed->setTitle("nexus event");
+		$embed->setDescription($message);
+		$msg->addEmbed($embed);
+		$w->send($msg);
+	}
+	public static function Chest(string $message,string $img){
+		self::$w = new Webhook(self::EVENT_URL);
+		$w = self::$w;
+		$msg = new Message();
+		$msg->setUsername("chest event");
+		$embed = new Embed();
+		$embed->setTitle("chest event");
+		$embed->setImage($img);
 		$embed->setDescription($message);
 		$msg->addEmbed($embed);
 		$w->send($msg);

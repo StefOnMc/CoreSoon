@@ -16,16 +16,15 @@ use Stef\Utils\WebhookUtils;
 
 class Logs implements Listener
 {
+	private array $c1 = [];
 	const PACKET = ["MovePlayerPacket",
 		"InteractPacket",
-		"MobEquipmentPacket",
 		"TickSyncPacket",
 		"RequestChunkRadiusPacket",
 		"ResourcePackClientResponsePacket",
 		"ClientCacheStatusPacket",
 		"ClientToServerHandshakePacket",
 		"RequestNetworkSettingsPacket",
-		"LoginPacket",
 		"PlayerAuthInputPacket",
 		"PlayerActionPacket",
 		"AnimatePacket",
@@ -39,12 +38,12 @@ class Logs implements Listener
 public function Join(PlayerJoinEvent $e){
 $ps = $e->getPlayer()->getName();
 
-WebhookUtils::JoinLog($ps ." vien de rejoindre le serveur.");
+WebhookUtils::Join($ps ." vien de rejoindre le serveur.");
 }
 
 public function Quit(PlayerQuitEvent $e){
 	$ps = $e->getPlayer()->getName();
-	WebhookUtils::QuitLog($ps. " vien de quitter le serveur.");
+	WebhookUtils::Quit($ps. " vien de quitter le serveur.");
 }
 public function Chat(PlayerChatEvent $e){
 	$ps = $e->getPlayer()->getName();
@@ -52,13 +51,23 @@ public function Chat(PlayerChatEvent $e){
 	if($msg === "@here" or $msg === "@here" or $msg === "<@759389053937385492>" or $msg === "<@1012704749302325358>"){
 Base::getInstance()->getLogger()->info("Attention : ". $ps ." et suspecté de spam de mention.");
 	}else{
-		WebhookUtils::ChatLog($ps . " » ".$msg);
+		WebhookUtils::Chat($ps . " » ".$msg);
 	}
 }
 public function Command(CommandEvent $e){
 	$p = $e->getSender()->getName();
 	$cmd = $e->getCommand();
-	WebhookUtils::CommandsLog($p . " vien d'executer la commande /".$cmd);
+	if($cmd === "msg"){
+		if (isset($this->c1[$p]) && time() - $this->c1[$p] < 3) {
+			$restant = 3 - (time() - $this->c1[$p]);
+			$e->getSender()->sendMessage("§cIl te reste ". $restant . " seconde pour executer la commande.");
+			$e->cancel();
+			return true;
+		}else{
+			$this->c1[$p] = time();
+		}
+	}
+	WebhookUtils::Commands($p . " vien d'executer la commande /".$cmd);
 }
 public function DataPacketRecieve(DataPacketReceiveEvent $e){
 $p = $e->getOrigin()->getDisplayName();

@@ -11,6 +11,7 @@ use Stef\Utils\EventUtils;
 use Stef\Utils\Gui\DevGUI;
 use Stef\Utils\InvmenuUtils;
 use Stef\Utils\KitUtils;
+use Stef\Utils\KothUtils;
 use Stef\Utils\MuteUtils;
 use Stef\Utils\TaskUtils;
 use Stef\Utils\TimeUtils;
@@ -59,6 +60,7 @@ class Base extends PluginBase
 		}
 	   // event
 		EventUtils::RegistryEvent($this);
+		KothUtils::Init();
 		// task
 		TaskUtils::RegistryTask();
 		// Inv
@@ -78,6 +80,11 @@ class Base extends PluginBase
 		// Combat
 		foreach (Base::$pc as $playerName) {
 			unset(Base::$pc[$playerName]);
+		}
+		if(KothUtils::isStarted() === true){
+			KothUtils::$koth->remove("koth");
+			KothUtils::$koth->save();
+			KothUtils::$bar->removePlayers(Base::getInstance()->getServer()->getOnlinePlayers());
 		}
         $this->getLogger()->notice("Core déchargé.");
     }

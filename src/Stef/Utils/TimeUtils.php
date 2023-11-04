@@ -11,6 +11,13 @@ public static function GetActualTime(){
 	$eu = $date->format('d/m/Y à H:i:s');
 	return $eu;
 }
+	public static function GetTime(){
+		$date = new \DateTime();
+		$dateFormat = new \DateTimeZone('Europe/Paris');
+		$date->setTimezone($dateFormat);
+		$eu = $date->format('H:i:s');
+		return $eu;
+	}
 	public static function FormatTime($seconds) {
 		if ($seconds >= 31536000) { // 31536000 secondes dans une année
 			$years = floor($seconds / 31536000);

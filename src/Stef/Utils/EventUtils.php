@@ -8,8 +8,10 @@ use Stef\Listener\Arrivage;
 use Stef\Listener\Death;
 use Stef\Listener\Fight;
 use Stef\Listener\ItemUse;
+use Stef\Listener\KothEvent;
 use Stef\Listener\Logs;
 use Stef\Listener\Modération;
+use Stef\Listener\Nexus;
 use Stef\Listener\Open;
 use Stef\Listener\Safe;
 use Stef\Listener\Server;
@@ -28,5 +30,7 @@ public static function RegistryEvent(PluginBase $c)
 	Base::getInstance()->getServer()->getPluginManager()->registerEvents(new ItemUse(),$c);
 	Base::getInstance()->getServer()->getPluginManager()->registerEvents(new Logs(),$c);
 	Base::getInstance()->getServer()->getPluginManager()->registerEvents(new Modération(),$c);
+	Base::getInstance()->getServer()->getPluginManager()->registerEvents(new KothEvent(),$c);
+	Base::getInstance()->getServer()->getPluginManager()->registerEvents(new Nexus(),$c);
 }
 }

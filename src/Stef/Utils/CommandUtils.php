@@ -6,6 +6,8 @@ use Stef\Base;
 use Stef\Command\Admin\Dev;
 use Stef\Command\Admin\Forceclear;
 use Stef\Command\Admin\Info;
+use Stef\Command\Admin\Koth;
+use Stef\Command\Admin\Nexus;
 use Stef\Command\Admin\Restart;
 use Stef\Command\Admin\Say;
 use Stef\Command\Admin\Stats;
@@ -77,6 +79,8 @@ class CommandUtils
 			new Unban("unban","débanir un joueur","/unban joueur",[]),
 			new Restart("restart","redémaré le serveur.","/restart",[]),
 			new Dev("dev","menu admin","/dev",[]),
+			new Koth("koth","démarée un koth","/koth",[]),
+			new Nexus("nexus","démarée un nexus","/nexus",[]),
 		];
 
 		Base::getInstance()->getServer()->getCommandMap()->registerAll(Base::PREFIX, $commands);
