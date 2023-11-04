@@ -51,3 +51,11 @@ permissions:
     default: op
   unban.use:
     default: op
+  restart.use:
+    default: op
+  dev.use:
+    default: op
+  koth.use:
+    default: op
+  nexus.use:
+    default: op
