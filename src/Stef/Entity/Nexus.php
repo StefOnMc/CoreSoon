@@ -33,9 +33,10 @@ class Nexus extends Living {
 		$c = \Stef\Listener\Nexus::$name;
 		foreach ($c as $s){
 			Base::getInstance()->getServer()->broadcastMessage($s . " vien de gagner");
-
+\Stef\Command\Admin\Nexus::$nexuss = false;
 				WebhookUtils::Nexus($s . " vien de vaincre le Nexus !");
 		}
+		\Stef\Listener\Nexus::$name = [];
 		}
 
 	public function getDrops() : array{

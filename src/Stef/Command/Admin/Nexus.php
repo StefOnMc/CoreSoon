@@ -10,6 +10,7 @@ use pocketmine\lang\Translatable;
 use pocketmine\player\Player;
 use Stef\Base;
 use Stef\Listener\Server;
+use Stef\Utils\EntityUtils;
 use Stef\Utils\WebhookUtils;
 
 class Nexus extends VanillaCommand
@@ -31,7 +32,7 @@ public function execute(CommandSender $sender, string $commandLabel, array $args
 						$n = new \Stef\Entity\Nexus(new Location(9,90,9,Base::getInstance()->getServer()->getWorldManager()->getWorldByName('world'),0,0));
 						$n->setMaxHealth(2500);
 						$n->setHealth(2500);
-						$n->setNameTag("Nexus \n " . "2000/2500");
+						$n->setNameTag("Nexus \n " . "2500/2500");
 						$n->spawnToAll();
 						self::$nexuss = true;
 						WebhookUtils::Nexus("un nexus vien d'etre lancé !");
@@ -39,6 +40,16 @@ public function execute(CommandSender $sender, string $commandLabel, array $args
 					}else{
 						$sender->sendMessage("le nexus a deja spawn");
 					}
+						break;
+					case "stop":
+						if(self::$nexuss === true){
+							EntityUtils::ClearNexus();
+							self::$nexuss = false;
+							WebhookUtils::Nexus("le nexus vien d'etre stop par ". $sender->getName());
+							Base::getInstance()->getServer()->broadcastMessage("le nexus vien d'etre stop par ". $sender->getName());
+						}else{
+							$sender->sendMessage("le nexus n'a jamais spawn");
+						}
 						break;
 				}
 			}else{

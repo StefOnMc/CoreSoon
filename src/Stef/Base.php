@@ -7,6 +7,7 @@ use pocketmine\utils\SingletonTrait;
 use pocketmine\world\World;
 use Stef\Utils\BanUtils;
 use Stef\Utils\CommandUtils;
+use Stef\Utils\EntityUtils;
 use Stef\Utils\EventUtils;
 use Stef\Utils\Gui\DevGUI;
 use Stef\Utils\InvmenuUtils;
@@ -40,6 +41,7 @@ class Base extends PluginBase
     {
        self::setInstance($this);
 	   CommandUtils::Unregister();
+	   EntityUtils::RegisterNexus();
     }
 
     protected function onEnable(): void
@@ -86,6 +88,7 @@ class Base extends PluginBase
 			KothUtils::$koth->save();
 			KothUtils::$bar->removePlayers(Base::getInstance()->getServer()->getOnlinePlayers());
 		}
+		EntityUtils::ClearNexus();
         $this->getLogger()->notice("Core déchargé.");
     }
 }

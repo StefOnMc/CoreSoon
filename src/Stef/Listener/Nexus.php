@@ -8,7 +8,7 @@ use pocketmine\player\Player;
 
 class Nexus implements Listener
 {
-	public static $name = [];
+	public static array $name = [];
 	public function EntityDamageByEntityEvent(EntityDamageByEntityEvent $event) {
 		$nexus = $event->getEntity();
 
@@ -18,7 +18,7 @@ class Nexus implements Listener
 				if ($damager instanceof Player) {
 					$event->cancel();
 					$currentHealth = $nexus->getHealth();
-					$nexus->setHealth($currentHealth - 1);
+					$nexus->setHealth($currentHealth - 2000);
 					self::$name = [$damager->getName()];
 					if ($nexus->getHealth() < 0) {
 						$nexus->setHealth(0);
