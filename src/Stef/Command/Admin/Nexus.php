@@ -51,9 +51,12 @@ public function execute(CommandSender $sender, string $commandLabel, array $args
 							$sender->sendMessage("le nexus n'a jamais spawn");
 						}
 						break;
+					default:
+						$sender->sendMessage("§c/nexus start/stop");
+						break;
 				}
 			}else{
-				$sender->sendMessage("§c/nexus start");
+				$sender->sendMessage("§c/nexus start/stop");
 			}
 		}else{
 			$sender->sendMessage(Base::NO_PERM);
