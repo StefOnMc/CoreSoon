@@ -3,9 +3,7 @@
 namespace Stef\Task;
 
 use JsonException;
-use pocketmine\block\VanillaBlocks;
 use pocketmine\console\ConsoleCommandSender;
-use pocketmine\event\entity\ItemSpawnEvent;
 use pocketmine\lang\Language;
 use pocketmine\player\Player;
 use pocketmine\scheduler\Task;

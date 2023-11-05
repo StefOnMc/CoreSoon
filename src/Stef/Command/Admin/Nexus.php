@@ -4,12 +4,10 @@ namespace Stef\Command\Admin;
 
 use pocketmine\command\CommandSender;
 use pocketmine\command\defaults\VanillaCommand;
-use pocketmine\entity\Entity;
 use pocketmine\entity\Location;
 use pocketmine\lang\Translatable;
 use pocketmine\player\Player;
 use Stef\Base;
-use Stef\Listener\Server;
 use Stef\Utils\EntityUtils;
 use Stef\Utils\WebhookUtils;
 

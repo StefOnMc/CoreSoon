@@ -20,6 +20,7 @@ class Logs implements Listener
 	const PACKET = ["MovePlayerPacket",
 		"InteractPacket",
 		"TickSyncPacket",
+		"TextPacket",
 		"RequestChunkRadiusPacket",
 		"ResourcePackClientResponsePacket",
 		"ClientCacheStatusPacket",

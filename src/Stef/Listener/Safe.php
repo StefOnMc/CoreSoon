@@ -2,7 +2,6 @@
 
 namespace Stef\Listener;
 
-use JsonException;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
@@ -10,14 +9,11 @@ use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityRegainHealthEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
-use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerMoveEvent;
-use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\math\Vector3;
 use pocketmine\player\Player;
-use pocketmine\utils\Config;
 use Stef\Base;
-use Stef\Utils\WebhookUtils;
+
 
 class Safe implements Listener
 {

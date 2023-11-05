@@ -18,7 +18,7 @@ class Nexus implements Listener
 				if ($damager instanceof Player) {
 					$event->cancel();
 					$currentHealth = $nexus->getHealth();
-					$nexus->setHealth($currentHealth - 2000);
+					$nexus->setHealth($currentHealth - 2);
 					self::$name = [$damager->getName()];
 					if ($nexus->getHealth() < 0) {
 						$nexus->setHealth(0);

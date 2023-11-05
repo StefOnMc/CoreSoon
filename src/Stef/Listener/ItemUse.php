@@ -12,8 +12,6 @@ use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
-use pocketmine\scheduler\ClosureTask;
-use Stef\Base;
 
 class ItemUse implements Listener
 {
