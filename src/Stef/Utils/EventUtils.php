@@ -5,6 +5,7 @@ namespace Stef\Utils;
 use pocketmine\plugin\PluginBase;
 use Stef\Base;
 use Stef\Listener\Arrivage;
+use Stef\Listener\Cps;
 use Stef\Listener\Death;
 use Stef\Listener\Fight;
 use Stef\Listener\ItemUse;
@@ -32,5 +33,6 @@ public static function RegistryEvent(PluginBase $c)
 	Base::getInstance()->getServer()->getPluginManager()->registerEvents(new Modération(),$c);
 	Base::getInstance()->getServer()->getPluginManager()->registerEvents(new KothEvent(),$c);
 	Base::getInstance()->getServer()->getPluginManager()->registerEvents(new Nexus(),$c);
+	Base::getInstance()->getServer()->getPluginManager()->registerEvents(new Cps(),$c);
 }
 }

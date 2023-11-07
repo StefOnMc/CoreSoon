@@ -185,4 +185,15 @@ class WebhookUtils
 		$msg->addEmbed($embed);
 		$w->send($msg);
 	}
+	public static function Cps(string $message){
+		self::$w = new Webhook(self::CHEAT_URL);
+		$w = self::$w;
+		$msg = new Message();
+		$msg->setUsername("cps logs");
+		$embed = new Embed();
+		$embed->setTitle("cps logs");
+		$embed->setDescription($message);
+		$msg->addEmbed($embed);
+		$w->send($msg);
+	}
 }

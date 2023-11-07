@@ -19,6 +19,10 @@ class Safe implements Listener
 {
 	private array $cooldowns = [];
 private $purePerms;
+	private static bool $isGameActive = true;
+	private static  $currentGameType;
+	public static $currentGameQuestionMath;
+	public static $currentGameQuestionChat;
 	public function onEntityDamage(EntityDamageEvent $event): void
 	{
 		$entity = $event->getEntity();
@@ -41,9 +45,47 @@ private $purePerms;
 			return "...";
 		}
 	}
+	public static function startGame($gameType) {
+		self::$isGameActive = true;
+		self::$currentGameType = $gameType;
+
+		if ($gameType === "math") {
+			self::startMath();
+		} elseif ($gameType === "mot") {
+			self::startMot();
+		}
+
+		Base::getInstance()->getServer()->broadcastMessage("Un jeu de type $gameType a commencé ! Essayez de deviner la réponse.");
+	}
+	private static function startMath() {
+		$num1 = mt_rand(1, 1000);
+		$num2 = mt_rand(1, 1000);
+		$result = "$num1 + $num2 ?";
+		self::$currentGameQuestionMath = [$num1 + $num2];
+		Base::getInstance()->getServer()->broadcastMessage("Quelle est la réponse à cette équation : ". $result);
+	}
+
+	private static function startMot() {
+		$wordList = ["bigtor", "zebinet", "stefi"];
+		$c = $wordList[array_rand($wordList)];
+		$shuffledWord = str_shuffle($c);
+		self::$currentGameQuestionChat = [$wordList[array_rand($wordList)]];
+		Base::getInstance()->getServer()->broadcastMessage("Devinez le mot : $shuffledWord");
+	}
+	protected static array $recipients;
+
+
 	public function Chat(PlayerChatEvent $e){
 			$p = $e->getPlayer();
 			$msg = $e->getMessage();
+		if (self::$isGameActive) {
+			$message = strtolower($msg);
+			if (self::$currentGameType === "mot" && self::$currentGameQuestionChat[$message]) {
+				Base::getInstance()->getServer()->broadcastMessage($p->getName() . " a bien remis le mot en place !");
+			} elseif (self::$currentGameType === "math" && self::$currentGameQuestionMath[$message]) {
+				Base::getInstance()->getServer()->broadcastMessage($p->getName() . " a donné le bon calcul !");
+			}
+		}
  $psd = $p->getName();
 			$domaine = [
 				"pornhub",
